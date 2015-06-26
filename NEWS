@@ -1,0 +1,109 @@
+01-06-2010 - Rodrigo
+- Changed alternate color to gray0 (according IaOra specs)
+
+27-05-2010 - Rodrigo
+- Removed border from a ScrollBar on a maximized window (#52903)
+- Fixed ProgressBar issue on Quassel (thanks ahmad78!)
+
+18-05-2010 - Rodrigo
+- Added division marks on the progress bar (#59284)
+- Removed left/right borders when in maximized mode
+
+15-04-2010 - Rodrigo
+- Wrong background colors on lists (#56883 and #57079)
+- Fix combobox width on kontact (#55699)
+- Drawing elided text on dockwidget titlebars
+
+** 12-04-2010 0.3.0 **
+09-04-2010 - Rodrigo
+- Fix TitleBar font size problem (#58582)
+- Added borders to comboboxes (#57664)
+- Properly aligned TitleBar buttons (#57784)
+- Rewritten the BorderSize configuration (this closes #47685 too)
+
+07-04-2010 - Rodrigo
+- Added window grouping function to IaOra (tabbing support)
+
+02-03-2010 - Rodrigo
+- Added a patch that fix OpenOffice problem (thanks to Rafael Cabral)
+
+12-02-2010 - Rodrigo
+- Rewritten IaOra Kwin configuration
+- Added option to change TitleBar text alignment (bug #57056)
+- Added option to enable window grouping (not enabled until finished)
+
+** 12 02 2010 0.2.5.6
+
+09-02-2010 - Rodrigo
+- Some components now are left colored when the window lost the focus
+
+** 05 02 2010 0.2.5.5
+
+04-02-2010 - Rodrigo
+- Now, the arrows look like real arrows
+- Added partial contributor patch (according bug #57263)
+- Disabled buttons now have the same color scheme as the enabled ones
+- Fixed separator size on combobox
+
+04-02-2010 - Boiko
+- Fix crash in drawComplexControl ( Bug #57400 )
+ 
+02-02-2010 - Rodrigo
+- Allow to resize the window from the top
+- TitleBar text now is painted in a bigger font with bold effect
+- Let the scrollbars colored when no focus
+
+13-01-2010 - Rodrigo
+- Fix the color painting on PanelItemViewRow (Bug # 56883)
+
+** 01 09 2009 0.2.5.4
+08-01-2010 - Rodrigo
+- Fix the highligh problem with ItemViewItems (Bug # 56883)
+- Now, the application name on the titlebar is centered
+
+** 01 05 2009 0.2.5.3
+01-05-2009 Nlecureuil
+- Fix crash in Quassel (Bug # 55641) ( the previous fix was only in iaora-kde )
+
+**  01-01-2010 2009 0.2.5.2**
+
+18-12-2009 - Nlecureuil
+- Fix minimum size for the scrollbar slider
+
+**  ??? ?? 2009 0.2.5.1**
+
+07-12-2009 - Nlecureuil
+- Install iaoracolors in /etc
+
+04-12-2009 - Rodrigo
+- Change the way titlebar colors are handled
+TODO: choose where to install the config file
+
+23-11-2009 - Nlecureuil
+- Fix crash in Quassel (Bug # 55641)
+
+19-11-2009 - Rodrigo
+- Fixed title bar text alignment
+- Removed unused code
+
+17-11-2009 - Nlecureuil
+- Fix SymbolPlus and SymbolMinus in trees
+
+16-11-2009 - Rodrigo
+- Changed from gradient to flat colors on an ItemViewItem
+- Added code to handle an ItemViewRow
+
+27-10-2009 Rodrigo
+- Fixed IaOra color schemes
+- Added IaOraSteel color scheme
+- Added IaOraNight color scheme
+- Fixed kwin border
+- Fixed inactive TitleBar drawing
+- Fixed TitleBar buttons
+
+26-10-2009 Rodrigo
+- Fixed kwin border
+- Fixed submenu arrow drawing when mouse over
+- Fixed EditLine drawing on Amarok
+- Fixed text color on TabBars
+

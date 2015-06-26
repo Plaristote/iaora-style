@@ -1,0 +1,7 @@
+[Misc]
+Name=IaOra-Kde
+Comment=IaOra Kde style
+#ConfigPage=kstyle_iaora_config
+
+[KDE]
+WidgetStyle=IaOraKde
