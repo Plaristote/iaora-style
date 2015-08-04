@@ -32,31 +32,32 @@ class KConfigGroup;
 
 class IaOraConfigUI : public QWidget, public Ui_IaOraConfigDialog
 {
-	public:
-		IaOraConfigUI(QWidget *parent) : QWidget(parent){ 
-			setupUi(this);
-		}
+public:
+    IaOraConfigUI(QWidget *parent) : QWidget(parent)
+    {
+        setupUi(this);
+    }
 };
 
 class IaOraConfig : public QObject
 {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		IaOraConfig(KConfig *conf, QWidget *parent);
-		virtual ~IaOraConfig();
+public:
+    IaOraConfig(KConfig *conf, QWidget *parent);
+    virtual ~IaOraConfig();
 
-	signals:
-		void changed();
+signals:
+    void changed();
 
-	public slots:
-		void load(const KConfigGroup&);
-		void save(KConfigGroup&);
-		void defaults();
+public slots:
+    void load(const KConfigGroup&);
+    void save(KConfigGroup&);
+    void defaults();
 
-	private:
-		IaOraConfigUI *m_ui;
-		KConfig *iaoraConfig;
+private:
+    IaOraConfigUI *m_ui;
+    KConfig *iaoraConfig;
 };
 
 #endif

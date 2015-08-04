@@ -16,58 +16,58 @@ class QMdiSubWindow;
 
 class SkulptureStyleConfig : public QWidget, private Ui::SkulptureStyleDialog
 {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		explicit SkulptureStyleConfig(QWidget* parent = 0);
-		virtual ~SkulptureStyleConfig();
+public:
+    explicit SkulptureStyleConfig(QWidget* parent = 0);
+    virtual ~SkulptureStyleConfig();
 
-		virtual QSize sizeHint() const;
+    virtual QSize sizeHint() const;
 
-	Q_SIGNALS:
-		void changed(bool);
+Q_SIGNALS:
+    void changed(bool);
 
-	public Q_SLOTS:
-		void save();
-		void defaults();
+public Q_SLOTS:
+    void save();
+    void defaults();
 
-	protected:
-		void load();
-		void apply();
-		void saveSettings(QSettings &settings);
-		void loadSettings(QSettings &settings);
+protected:
+    void load();
+    void apply();
+    void saveSettings(QSettings &settings);
+    void loadSettings(QSettings &settings);
 
-	protected Q_SLOTS:
-		void updateChanged();
-		void updatePreview();
+protected Q_SLOTS:
+    void updateChanged();
+    void updatePreview();
 
-	private Q_SLOTS:
-		void subWindowActivated(QMdiSubWindow *window);
+private Q_SLOTS:
+    void subWindowActivated(QMdiSubWindow *window);
 
-	private:
-		void init();
+private:
+    void init();
 
-	private:
-		bool savedAnimateProgressBars;
-		bool savedAllowScrollBarSliderToCoverArrows;
-		bool savedHideShortcutUnderlines;
+private:
+    bool savedAnimateProgressBars;
+    bool savedAllowScrollBarSliderToCoverArrows;
+    bool savedHideShortcutUnderlines;
 };
 
 
 /*-----------------------------------------------------------------------*/
 
 enum ThemeCategory {
-	Colors,
-	Fonts,		// text attributes
-	Frames,		// style of layout
-	Layout,		// sizing, spacing
-	Decorations,	// grips etc.
-	Gradients,
-	Accessibility,
-	Icons,
-	Effects,		// animations, fading, light
-	Cursors,
-	Sounds,
+    Colors,
+    Fonts,      // text attributes
+    Frames,     // style of layout
+    Layout,     // sizing, spacing
+    Decorations,    // grips etc.
+    Gradients,
+    Accessibility,
+    Icons,
+    Effects,        // animations, fading, light
+    Cursors,
+    Sounds,
 };
 
 
@@ -75,41 +75,41 @@ enum ThemeCategory {
 
 class KThemePreview : public QWidget
 {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		enum ThemeRole { General, Fixed, Small, Toolbar, MainToolbar, Menu, Window, TaskBar, Desktop };
+public:
+    enum ThemeRole { General, Fixed, Small, Toolbar, MainToolbar, Menu, Window, TaskBar, Desktop };
 
-	public:
-		explicit KThemePreview(QWidget *parent = 0);
-		virtual ~KThemePreview();
+public:
+    explicit KThemePreview(QWidget *parent = 0);
+    virtual ~KThemePreview();
 
-	public:
-		using QWidget::setFont;
-		void setFont(ThemeRole role, const QFont &font);
-		// TODO font settings, such as antialiasing and hinting
+public:
+    using QWidget::setFont;
+    void setFont(ThemeRole role, const QFont &font);
+    // TODO font settings, such as antialiasing and hinting
 
-		void setIconSize(ThemeRole role, const QSize &size);
-		void setIconTheme(const QString &iconTheme);
-		// TODO icon effects, icon animation, double size
+    void setIconSize(ThemeRole role, const QSize &size);
+    void setIconTheme(const QString &iconTheme);
+    // TODO icon effects, icon animation, double size
 
-		void setWindowDecoration(const QString &windowDecoration);
-		// TODO window buttons, window theme settings
+    void setWindowDecoration(const QString &windowDecoration);
+    // TODO window buttons, window theme settings
 
-		// setStyle(QStyle *);
-		void setSkulpturePrivateSettings(QSettings &s);
-		// TODO style effects, toolbar options
+    // setStyle(QStyle *);
+    void setSkulpturePrivateSettings(QSettings &s);
+    // TODO style effects, toolbar options
 
-	protected:
-		void addWindow(QWidget *window);
-		void addPage(QWidget *widget);
+protected:
+    void addWindow(QWidget *window);
+    void addPage(QWidget *widget);
 
-		void removeWindow(QWidget *window);
-		void removePage(QWidget *page);
+    void removeWindow(QWidget *window);
+    void removePage(QWidget *page);
 
-	private:
-		class Private;
-		Private * const d;
+private:
+    class Private;
+    Private * const d;
 };
 
 
@@ -117,34 +117,33 @@ class KThemePreview : public QWidget
 
 #include <QtGui/QStyle>
 
-struct SkMethodData
-{
-	int version;
+struct SkMethodData {
+    int version;
 };
 
 
-struct SkMethodDataSetSettingsFileName : public SkMethodData
-{
-	// in version 1
-	QString fileName;
+struct SkMethodDataSetSettingsFileName : public SkMethodData {
+    // in version 1
+    QString fileName;
 };
 
 
 class SkulptureStyle : public QStyle
 {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		// internal, reserved for future use
-		enum SkulpturePrivateMethod {
-			SPM_SupportedMethods = 0,
-			SPM_SetSettingsFileName = 1,
-		};
+public:
+    // internal, reserved for future use
+    enum SkulpturePrivateMethod {
+        SPM_SupportedMethods = 0,
+        SPM_SetSettingsFileName = 1,
+    };
 
-	public Q_SLOTS:
-		int skulpturePrivateMethod(SkulpturePrivateMethod /*id*/, void */*data*/ = 0) {
-			return 0;
-		}
+public Q_SLOTS:
+    int skulpturePrivateMethod(SkulpturePrivateMethod /*id*/, void */*data*/ = 0)
+    {
+        return 0;
+    }
 };
 
 

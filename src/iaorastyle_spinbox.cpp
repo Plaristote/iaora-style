@@ -22,87 +22,76 @@
 
 void IaOraStyle::drawSpinBox(const QStyleOptionComplex *opt, QPainter *p)
 {
-	const QStyleOptionSpinBox *sb = qstyleoption_cast<const QStyleOptionSpinBox *>(opt);
-	QStyleOptionSpinBox copy = *sb;
-	QRect r = opt->rect;
-	
-	if (!sb)
-		return;
-	
-	QStyle::PrimitiveElement pe;
-	
-	if (sb->frame && (sb->subControls & QStyle::SC_SpinBoxFrame)) 
-	{
-		QRect r = m_parent->subControlRect(QStyle::CC_SpinBox, sb, QStyle::SC_SpinBoxFrame);
-		
-		copy.rect = r;
-		drawFrame(&copy, p);
-	}
-	
-	/* SPIN-UP */
-	if (sb->subControls & QStyle::SC_SpinBoxUp) 
-	{
-		copy.subControls = QStyle::SC_SpinBoxUp;
-		QPalette pal2 = sb->palette;
-		if (!(sb->stepEnabled & QAbstractSpinBox::StepUpEnabled)) 
-		{
-			pal2.setCurrentColorGroup(QPalette::Disabled);
-			copy.state &= ~QStyle::State_Enabled;
-		}
+    const QStyleOptionSpinBox *sb = qstyleoption_cast<const QStyleOptionSpinBox *>(opt);
+    QStyleOptionSpinBox copy = *sb;
+    QRect r = opt->rect;
 
-		copy.palette = pal2;
+    if (!sb)
+        return;
 
-		if (sb->activeSubControls == QStyle::SC_SpinBoxUp && (sb->state & QStyle::State_Sunken)) 
-		{
-			copy.state |= QStyle::State_On;
-			copy.state |= QStyle::State_Sunken;
-		} 
-		else
-		{
-			copy.state |= QStyle::State_Raised;
-			copy.state &= ~QStyle::State_Sunken;
-		}
-		pe = (sb->buttonSymbols == QAbstractSpinBox::PlusMinus ? QStyle::PE_IndicatorSpinPlus : QStyle::PE_IndicatorSpinUp);
-		copy.rect = m_parent->subControlRect(QStyle::CC_SpinBox, sb, QStyle::SC_SpinBoxUp);
-		m_parent->drawPrimitive(QStyle::PE_PanelButtonBevel, &copy, p);
-		drawBorder(p, opt, copy.rect, sb->state & QStyle::State_Enabled, IaOraStyle::BorderLeft);
-		/* FIXME: don't really know why the rect is not right at this point, but anyway... */
-		copy.rect.adjust(1, 2, 0, 0);
-		m_parent->drawPrimitive(pe, &copy, p);
-		
-	}
-	/* SPIN-DOWN */
-	if (sb->subControls & QStyle::SC_SpinBoxDown) 
-	{
-		copy.subControls = QStyle::SC_SpinBoxDown;
-		copy.state = sb->state;
-		QPalette pal2 = sb->palette;
-		if (!(sb->stepEnabled & QAbstractSpinBox::StepDownEnabled)) 
-		{
-			pal2.setCurrentColorGroup(QPalette::Disabled);
-			copy.state &= ~QStyle::State_Enabled;
-		}
+    QStyle::PrimitiveElement pe;
 
-		copy.palette = pal2;
+    if (sb->frame && (sb->subControls & QStyle::SC_SpinBoxFrame)) {
+        QRect r = m_parent->subControlRect(QStyle::CC_SpinBox, sb, QStyle::SC_SpinBoxFrame);
 
-		if (sb->activeSubControls == QStyle::SC_SpinBoxDown && (sb->state & QStyle::State_Sunken)) 
-		{
-			copy.state |= QStyle::State_On;
-			copy.state |= QStyle::State_Sunken;
-		} 
-		else
-		{
-			copy.state |= QStyle::State_Raised;
-			copy.state &= ~QStyle::State_Sunken;
-		}
-		pe = (sb->buttonSymbols == QAbstractSpinBox::PlusMinus ? QStyle::PE_IndicatorSpinMinus : QStyle::PE_IndicatorSpinDown);
-		copy.rect = m_parent->subControlRect(QStyle::CC_SpinBox, sb, QStyle::SC_SpinBoxDown);
-		m_parent->drawPrimitive(QStyle::PE_PanelButtonBevel, &copy, p);
-		drawBorder(p, opt, copy.rect, sb->state & QStyle::State_Enabled, IaOraStyle::BorderLeft | IaOraStyle::BorderTop);
-		/* FIXME: don't really know why the rect is not right at this point, but anyway... */
-		copy.rect.adjust(1, 2, 0, 0);
-		m_parent->drawPrimitive(pe, &copy, p);
-		
-	}
+        copy.rect = r;
+        drawFrame(&copy, p);
+    }
+
+    /* SPIN-UP */
+    if (sb->subControls & QStyle::SC_SpinBoxUp) {
+        copy.subControls = QStyle::SC_SpinBoxUp;
+        QPalette pal2 = sb->palette;
+        if (!(sb->stepEnabled & QAbstractSpinBox::StepUpEnabled)) {
+            pal2.setCurrentColorGroup(QPalette::Disabled);
+            copy.state &= ~QStyle::State_Enabled;
+        }
+
+        copy.palette = pal2;
+
+        if (sb->activeSubControls == QStyle::SC_SpinBoxUp && (sb->state & QStyle::State_Sunken)) {
+            copy.state |= QStyle::State_On;
+            copy.state |= QStyle::State_Sunken;
+        } else {
+            copy.state |= QStyle::State_Raised;
+            copy.state &= ~QStyle::State_Sunken;
+        }
+        pe = (sb->buttonSymbols == QAbstractSpinBox::PlusMinus ? QStyle::PE_IndicatorSpinPlus : QStyle::PE_IndicatorSpinUp);
+        copy.rect = m_parent->subControlRect(QStyle::CC_SpinBox, sb, QStyle::SC_SpinBoxUp);
+        m_parent->drawPrimitive(QStyle::PE_PanelButtonBevel, &copy, p);
+        drawBorder(p, opt, copy.rect, sb->state & QStyle::State_Enabled, IaOraStyle::BorderLeft);
+        /* FIXME: don't really know why the rect is not right at this point, but anyway... */
+        copy.rect.adjust(1, 2, 0, 0);
+        m_parent->drawPrimitive(pe, &copy, p);
+
+    }
+    /* SPIN-DOWN */
+    if (sb->subControls & QStyle::SC_SpinBoxDown) {
+        copy.subControls = QStyle::SC_SpinBoxDown;
+        copy.state = sb->state;
+        QPalette pal2 = sb->palette;
+        if (!(sb->stepEnabled & QAbstractSpinBox::StepDownEnabled)) {
+            pal2.setCurrentColorGroup(QPalette::Disabled);
+            copy.state &= ~QStyle::State_Enabled;
+        }
+
+        copy.palette = pal2;
+
+        if (sb->activeSubControls == QStyle::SC_SpinBoxDown && (sb->state & QStyle::State_Sunken)) {
+            copy.state |= QStyle::State_On;
+            copy.state |= QStyle::State_Sunken;
+        } else {
+            copy.state |= QStyle::State_Raised;
+            copy.state &= ~QStyle::State_Sunken;
+        }
+        pe = (sb->buttonSymbols == QAbstractSpinBox::PlusMinus ? QStyle::PE_IndicatorSpinMinus : QStyle::PE_IndicatorSpinDown);
+        copy.rect = m_parent->subControlRect(QStyle::CC_SpinBox, sb, QStyle::SC_SpinBoxDown);
+        m_parent->drawPrimitive(QStyle::PE_PanelButtonBevel, &copy, p);
+        drawBorder(p, opt, copy.rect, sb->state & QStyle::State_Enabled, IaOraStyle::BorderLeft | IaOraStyle::BorderTop);
+        /* FIXME: don't really know why the rect is not right at this point, but anyway... */
+        copy.rect.adjust(1, 2, 0, 0);
+        m_parent->drawPrimitive(pe, &copy, p);
+
+    }
 }
 

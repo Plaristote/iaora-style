@@ -5,14 +5,14 @@
 
 class MyWindow : public QMainWindow
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
-	MyWindow();
-	~MyWindow();
+    MyWindow();
+    ~MyWindow();
 
 public slots:
-	void slotSetStyle(const QString &style);
-	void slotContextMenu(const QPoint &pos);
+    void slotSetStyle(const QString &style);
+    void slotContextMenu(const QPoint &pos);
 };
 
 #endif

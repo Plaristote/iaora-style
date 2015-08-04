@@ -22,113 +22,101 @@
 
 void IaOraStyle::drawToolButton(const QStyleOption *opt, QPainter *p)
 {
-	const QStyleOptionToolButton *tlBtn = qstyleoption_cast <const QStyleOptionToolButton *>(opt);
+    const QStyleOptionToolButton *tlBtn = qstyleoption_cast <const QStyleOptionToolButton *>(opt);
 
-	if (!tlBtn)
-		return;
+    if (!tlBtn)
+        return;
 
-	QStyleOptionToolButton copy = *tlBtn;
-	// TODO: cache the gradients so that it is more efficient
-	bool sunken = (opt->state & QStyle::State_Sunken);
-	bool enabled = (opt->state & QStyle::State_Enabled);
-	bool hover = (opt->state & QStyle::State_MouseOver);
-	bool selected = (opt->state & QStyle::State_On);
-	
-	QRect r = opt->rect;
-	QPen oldPen = p->pen();
+    QStyleOptionToolButton copy = *tlBtn;
+    // TODO: cache the gradients so that it is more efficient
+    bool sunken = (opt->state & QStyle::State_Sunken);
+    bool enabled = (opt->state & QStyle::State_Enabled);
+    bool hover = (opt->state & QStyle::State_MouseOver);
+    bool selected = (opt->state & QStyle::State_On);
 
-	if (sunken || selected)
-		drawButton(&copy, p, false);
-	else if (hover && enabled)
-	{
-		copy.state |= QStyle::State_Enabled;
-		drawButton(&copy, p, false);
-	}
+    QRect r = opt->rect;
+    QPen oldPen = p->pen();
 
-	// Here we draw the icon (if exists)...
-	if (tlBtn->toolButtonStyle != Qt::ToolButtonTextOnly)
-	{
-		QIcon::Mode mode = (tlBtn->state & QStyle::State_Enabled) ? QIcon::Normal : QIcon::Disabled;
-		if (hover && enabled)
-			mode = QIcon::Active;
+    if (sunken || selected)
+        drawButton(&copy, p, false);
+    else if (hover && enabled) {
+        copy.state |= QStyle::State_Enabled;
+        drawButton(&copy, p, false);
+    }
 
-		QRect iconRect(r);
-		QSize s;
-	       
-		if (tlBtn->iconSize.width() > r.width()) s = QSize(r.width(), r.width());
-		else if (tlBtn->iconSize.height() > r.height()) s = QSize(r.height(), r.height());
-		else s = tlBtn->iconSize;
+    // Here we draw the icon (if exists)...
+    if (tlBtn->toolButtonStyle != Qt::ToolButtonTextOnly) {
+        QIcon::Mode mode = (tlBtn->state & QStyle::State_Enabled) ? QIcon::Normal : QIcon::Disabled;
+        if (hover && enabled)
+            mode = QIcon::Active;
 
-		QPixmap pix = tlBtn->icon.pixmap(s, mode);
+        QRect iconRect(r);
+        QSize s;
 
-		int align = 0 ;
-		if (tlBtn->toolButtonStyle == Qt::ToolButtonTextBesideIcon)
-		{
-			align |= Qt::AlignLeft;
-			iconRect.adjust(-8, 0, -(r.width() - s.width()), 0);
-		}
-		else if (tlBtn->toolButtonStyle == Qt::ToolButtonTextUnderIcon)
-		{
-			align |= Qt::AlignHCenter;
-			iconRect.adjust(0, 12, 0, 0);
-		}
-		else if (tlBtn->toolButtonStyle == Qt::ToolButtonIconOnly)
-			align |= Qt::AlignHCenter;
+        if (tlBtn->iconSize.width() > r.width()) s = QSize(r.width(), r.width());
+        else if (tlBtn->iconSize.height() > r.height()) s = QSize(r.height(), r.height());
+        else s = tlBtn->iconSize;
 
-		iconRect = m_parent->alignedRect(tlBtn->direction, Qt::Alignment(align), iconRect.size(), r);
-		m_parent->drawItemPixmap(p, iconRect, Qt::AlignCenter, pix);
-	}
+        QPixmap pix = tlBtn->icon.pixmap(s, mode);
 
-	// ... and here the text (if exists too)
-	if (tlBtn->toolButtonStyle != Qt::ToolButtonIconOnly)
-	{
-		int text_flags = m_parent->visualAlignment(tlBtn->direction, Qt::AlignVCenter | Qt::AlignCenter) | Qt::TextShowMnemonic;
+        int align = 0 ;
+        if (tlBtn->toolButtonStyle == Qt::ToolButtonTextBesideIcon) {
+            align |= Qt::AlignLeft;
+            iconRect.adjust(-8, 0, -(r.width() - s.width()), 0);
+        } else if (tlBtn->toolButtonStyle == Qt::ToolButtonTextUnderIcon) {
+            align |= Qt::AlignHCenter;
+            iconRect.adjust(0, 12, 0, 0);
+        } else if (tlBtn->toolButtonStyle == Qt::ToolButtonIconOnly)
+            align |= Qt::AlignHCenter;
 
-		QRect textRect = r;
-		if (tlBtn->toolButtonStyle == Qt::ToolButtonTextBesideIcon)
-		{
-			if (tlBtn->direction == Qt::LeftToRight)
-				textRect.adjust(tlBtn->iconSize.height() + 4, 0, 0, 0);
-			else
-				textRect.adjust(0, 0, -(tlBtn->iconSize.height() + 0), 0);
-		}
-		else if (tlBtn->toolButtonStyle == Qt::ToolButtonTextUnderIcon)
-			textRect.adjust(0, tlBtn->iconSize.width() + 8, 0, 0);
+        iconRect = m_parent->alignedRect(tlBtn->direction, Qt::Alignment(align), iconRect.size(), r);
+        m_parent->drawItemPixmap(p, iconRect, Qt::AlignCenter, pix);
+    }
+
+    // ... and here the text (if exists too)
+    if (tlBtn->toolButtonStyle != Qt::ToolButtonIconOnly) {
+        int text_flags = m_parent->visualAlignment(tlBtn->direction, Qt::AlignVCenter | Qt::AlignCenter) | Qt::TextShowMnemonic;
+
+        QRect textRect = r;
+        if (tlBtn->toolButtonStyle == Qt::ToolButtonTextBesideIcon) {
+            if (tlBtn->direction == Qt::LeftToRight)
+                textRect.adjust(tlBtn->iconSize.height() + 4, 0, 0, 0);
+            else
+                textRect.adjust(0, 0, -(tlBtn->iconSize.height() + 0), 0);
+        } else if (tlBtn->toolButtonStyle == Qt::ToolButtonTextUnderIcon)
+            textRect.adjust(0, tlBtn->iconSize.width() + 8, 0, 0);
 
 
-		drawItemText(p, textRect, text_flags, tlBtn->palette, enabled, tlBtn->text, QPalette::Text);
-	}
+        drawItemText(p, textRect, text_flags, tlBtn->palette, enabled, tlBtn->text, QPalette::Text);
+    }
 
-	// it has a menu?
-	if (tlBtn->features & QStyleOptionToolButton::HasMenu)
-	{
-		copy.rect = m_parent->subControlRect(QStyle::CC_ToolButton, tlBtn, QStyle::SC_ToolButtonMenu);
+    // it has a menu?
+    if (tlBtn->features & QStyleOptionToolButton::HasMenu) {
+        copy.rect = m_parent->subControlRect(QStyle::CC_ToolButton, tlBtn, QStyle::SC_ToolButtonMenu);
 
-		copy.state = QStyle::State_Horizontal;
+        copy.state = QStyle::State_Horizontal;
 
-		if (enabled)
-			copy.state |= QStyle::State_Enabled;
-		if (sunken)
-			copy.state |= QStyle::State_Sunken;
+        if (enabled)
+            copy.state |= QStyle::State_Enabled;
+        if (sunken)
+            copy.state |= QStyle::State_Sunken;
 
-		if (copy.rect != opt->rect){
-			copy.rect.adjust(2, 1, 0, 0);
-			drawSymbol(&copy, p, IaOraStyle::SymbolArrowDown);
+        if (copy.rect != opt->rect) {
+            copy.rect.adjust(2, 1, 0, 0);
+            drawSymbol(&copy, p, IaOraStyle::SymbolArrowDown);
 
-			if (hover && enabled){
-				copy.rect = QRect(copy.rect.left() - 2, r.top(), 2, r.height());
-				drawSeparator(&copy, p, 4);
-			}
-		}
-		else // I don't know why some toolbuttons don't have a correct place to their arrows...
-		{
-			copy.rect = QRect(0, 0, 8, 8);
-			copy.rect.moveLeft(r.right() - 8);
-			copy.rect.moveBottom(r.bottom());
-			drawSymbol(&copy, p, IaOraStyle::SymbolArrowDown);
-		}
-	}
+            if (hover && enabled) {
+                copy.rect = QRect(copy.rect.left() - 2, r.top(), 2, r.height());
+                drawSeparator(&copy, p, 4);
+            }
+        } else { // I don't know why some toolbuttons don't have a correct place to their arrows...
+            copy.rect = QRect(0, 0, 8, 8);
+            copy.rect.moveLeft(r.right() - 8);
+            copy.rect.moveBottom(r.bottom());
+            drawSymbol(&copy, p, IaOraStyle::SymbolArrowDown);
+        }
+    }
 
-	p->setPen(oldPen);
+    p->setPen(oldPen);
 }
 

@@ -30,12 +30,11 @@
 
 #include <QColor>
 
-typedef struct
-{
-	QColor gray[7];
-	QColor color[5];
-	QColor black;
-	QColor white;
+typedef struct {
+    QColor gray[7];
+    QColor color[5];
+    QColor black;
+    QColor white;
 } ColorData;
 
 /*-----------------------------------------------------------------------*/
@@ -45,24 +44,24 @@ class QStyleOptionButton;
 
 class IaOraDecorationButton : public KCommonDecorationButton
 {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		IaOraDecorationButton(ButtonType type, KCommonDecoration *parent);
-		virtual ~IaOraDecorationButton();
-		virtual void reset(unsigned long changed);
+public:
+    IaOraDecorationButton(ButtonType type, KCommonDecoration *parent);
+    virtual ~IaOraDecorationButton();
+    virtual void reset(unsigned long changed);
 
-	protected:
-		virtual void paintEvent(QPaintEvent *event);
+protected:
+    virtual void paintEvent(QPaintEvent *event);
 
-	protected:
-		void initStyleOption(QStyleOptionButton &opt);
+protected:
+    void initStyleOption(QStyleOptionButton &opt);
 
-	private:
-		void enterEvent(QEvent *e);
-		void leaveEvent(QEvent *e);
-		void init();
-		bool m_isHover;
+private:
+    void enterEvent(QEvent *e);
+    void leaveEvent(QEvent *e);
+    void init();
+    bool m_isHover;
 };
 
 
@@ -73,71 +72,71 @@ class QStyleOption;
 //class IaOraDecoration : public KCommonDecorationUnstable // TABS
 class IaOraDecoration : public KCommonDecoration
 {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		IaOraDecoration(KDecorationBridge *bridge, KDecorationFactory *factory);
-		virtual ~IaOraDecoration();
+public:
+    IaOraDecoration(KDecorationBridge *bridge, KDecorationFactory *factory);
+    virtual ~IaOraDecoration();
 
-	public:
-		virtual QString visibleName() const;
-		virtual bool decorationBehaviour(DecorationBehaviour behaviour) const;
-		virtual int layoutMetric(LayoutMetric lm, bool respectWindowState = true, const KCommonDecorationButton *button = 0) const;
-		virtual void updateWindowShape();
+public:
+    virtual QString visibleName() const;
+    virtual bool decorationBehaviour(DecorationBehaviour behaviour) const;
+    virtual int layoutMetric(LayoutMetric lm, bool respectWindowState = true, const KCommonDecorationButton *button = 0) const;
+    virtual void updateWindowShape();
 
-		virtual void init();
-		virtual KCommonDecorationButton *createButton(ButtonType type);
+    virtual void init();
+    virtual KCommonDecorationButton *createButton(ButtonType type);
 
-		virtual void paintEvent(QPaintEvent *event);
+    virtual void paintEvent(QPaintEvent *event);
 
-		// tabbing related
-		//virtual bool eventFilter(QObject *object, QEvent *event);
-		//int itemClicked(const QPoint &point, bool between = false);
-		//bool mouseButtonPressEvent(QMouseEvent *event);
-		//bool mouseButtonReleaseEvent(QMouseEvent *event);
-		//bool mouseMoveEvent(QMouseEvent *event);
-		//bool dragEnterEvent(QDragEnterEvent *event);
-		//bool dragMoveEvent(QDragMoveEvent *event);
-		//bool dragLeaveEvent(QDragLeaveEvent *event);
-		//bool dropEvent(QDropEvent *event);
-		//
+    // tabbing related
+    //virtual bool eventFilter(QObject *object, QEvent *event);
+    //int itemClicked(const QPoint &point, bool between = false);
+    //bool mouseButtonPressEvent(QMouseEvent *event);
+    //bool mouseButtonReleaseEvent(QMouseEvent *event);
+    //bool mouseMoveEvent(QMouseEvent *event);
+    //bool dragEnterEvent(QDragEnterEvent *event);
+    //bool dragMoveEvent(QDragMoveEvent *event);
+    //bool dragLeaveEvent(QDragLeaveEvent *event);
+    //bool dropEvent(QDropEvent *event);
+    //
 
-	protected:
-		void initStyleOption(QStyleOption &opt);
+protected:
+    void initStyleOption(QStyleOption &opt);
 
-	private:
-		static ColorData *lookupData(const QPalette &pal);
+private:
+    static ColorData *lookupData(const QPalette &pal);
 
-		// load the configuration
-		void loadConfig();
+    // load the configuration
+    void loadConfig();
 
-		// draw a tab for some application
-		//void drawTab(QPainter &painter, const QRect &rect, ClientGroupItem &item, bool border, bool active, bool dragging = false); // TABS
-		
-		// use tabbing feature?
-		//bool useWindowGrouping; // TABS
-		//bool closeButtonsOnTabs; // TABS
-                
-		// what kind of border we're using
-		int borderSize;
-		// just the titlebar text alignment
-		int titleBarTextAlign;
+    // draw a tab for some application
+    //void drawTab(QPainter &painter, const QRect &rect, ClientGroupItem &item, bool border, bool active, bool dragging = false); // TABS
 
-		/* cached style hints and pixel metrics */
-		bool coloredFrame;
-		bool contrastFrame;
-		bool noBorder;
-		bool autoRaise;
-		int titleHeight;
-		int borderWidth;
+    // use tabbing feature?
+    //bool useWindowGrouping; // TABS
+    //bool closeButtonsOnTabs; // TABS
 
-		// tabbing related
-		QPoint clickPos, releasePos;
-        	Qt::MouseButton pressedButton;
-        	QList<IaOraDecorationButton*> closeButtonsList;
-	        bool clicking, dragging;
-	        int targetTab;
-		//
+    // what kind of border we're using
+    int borderSize;
+    // just the titlebar text alignment
+    int titleBarTextAlign;
+
+    /* cached style hints and pixel metrics */
+    bool coloredFrame;
+    bool contrastFrame;
+    bool noBorder;
+    bool autoRaise;
+    int titleHeight;
+    int borderWidth;
+
+    // tabbing related
+    QPoint clickPos, releasePos;
+    Qt::MouseButton pressedButton;
+    QList<IaOraDecorationButton*> closeButtonsList;
+    bool clicking, dragging;
+    int targetTab;
+    //
 };
 
 
@@ -148,22 +147,22 @@ class IaOraDecoration : public KCommonDecoration
 //class IaOraDecorationFactory : public KDecorationFactoryUnstable // TABS
 class IaOraDecorationFactory : public KDecorationFactory
 {
-	public:
-		IaOraDecorationFactory();
-		virtual ~IaOraDecorationFactory();
+public:
+    IaOraDecorationFactory();
+    virtual ~IaOraDecorationFactory();
 
-	public:
-		bool loadConfig();
-		virtual KDecoration *createDecoration(KDecorationBridge *bridge);
-		virtual bool reset(unsigned long changed);
-		//virtual QList<BorderSize> borderSizes() const;
-		virtual bool supports(Ability ability) const;
+public:
+    bool loadConfig();
+    virtual KDecoration *createDecoration(KDecorationBridge *bridge);
+    virtual bool reset(unsigned long changed);
+    //virtual QList<BorderSize> borderSizes() const;
+    virtual bool supports(Ability ability) const;
 
-	private:
-		int borderSize;
-		int alignFlag;
-		//bool useWindowGrouping; // TABS
-		//bool closeButtonsOnTabs; // TABS
+private:
+    int borderSize;
+    int alignFlag;
+    //bool useWindowGrouping; // TABS
+    //bool closeButtonsOnTabs; // TABS
 
 };
 

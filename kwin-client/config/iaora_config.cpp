@@ -27,81 +27,81 @@
 
 extern "C" KDE_EXPORT QObject *allocate_config(KConfig *conf, QWidget *parent)
 {
-	return new IaOraConfig(conf, parent);
+    return new IaOraConfig(conf, parent);
 }
 
 IaOraConfig::IaOraConfig(KConfig *conf, QWidget *parent) : QObject(parent)
 {
-	Q_UNUSED(conf);
+    Q_UNUSED(conf);
 
-	KGlobal::locale()->insertCatalog("kwin_clients");
+    KGlobal::locale()->insertCatalog("kwin_clients");
 
-	iaoraConfig = new KConfig("iaorarc");
-	KConfigGroup configGroup(iaoraConfig, "Windeco");
+    iaoraConfig = new KConfig("iaorarc");
+    KConfigGroup configGroup(iaoraConfig, "Windeco");
 
-	m_ui = new IaOraConfigUI(parent);
-	connect(m_ui->cmbBorderSize, SIGNAL(currentIndexChanged(int)), SIGNAL(changed()));
-	connect(m_ui->cmbAlign, SIGNAL(currentIndexChanged(int)), SIGNAL(changed()));
-	//connect(m_ui->chkGroup, SIGNAL(clicked()), SIGNAL(changed()));
-	//connect(m_ui->chkCloseButtons, SIGNAL(clicked()), SIGNAL(changed()));
+    m_ui = new IaOraConfigUI(parent);
+    connect(m_ui->cmbBorderSize, SIGNAL(currentIndexChanged(int)), SIGNAL(changed()));
+    connect(m_ui->cmbAlign, SIGNAL(currentIndexChanged(int)), SIGNAL(changed()));
+    //connect(m_ui->chkGroup, SIGNAL(clicked()), SIGNAL(changed()));
+    //connect(m_ui->chkCloseButtons, SIGNAL(clicked()), SIGNAL(changed()));
 
-	load(configGroup);
-	m_ui->show();
+    load(configGroup);
+    m_ui->show();
 }
 
 IaOraConfig::~IaOraConfig()
 {
-	delete m_ui;
-	delete iaoraConfig;
+    delete m_ui;
+    delete iaoraConfig;
 }
 
 // loads the configuration
 void IaOraConfig::load(const KConfigGroup&)
 {
-	KConfigGroup configGroup(iaoraConfig, "Windeco");
+    KConfigGroup configGroup(iaoraConfig, "Windeco");
 
-	int alignment;
-	int borderSize;
-	//bool windowGrouping; // TABS
-	//bool closeButtonsOnTabs; // TABS
+    int alignment;
+    int borderSize;
+    //bool windowGrouping; // TABS
+    //bool closeButtonsOnTabs; // TABS
 
-	// 1 is normal (0 = Tiny; 2 = Large; 3 = Very Large; 4 = Huge; 5 = Very Huge; 6 = Oversized)
-	borderSize = configGroup.readEntry("BorderSize", 1);
-	m_ui->cmbBorderSize->setCurrentIndex(borderSize);
+    // 1 is normal (0 = Tiny; 2 = Large; 3 = Very Large; 4 = Huge; 5 = Very Huge; 6 = Oversized)
+    borderSize = configGroup.readEntry("BorderSize", 1);
+    m_ui->cmbBorderSize->setCurrentIndex(borderSize);
 
-	// 1 is centered (0 = left; 2 = right)
-	alignment = configGroup.readEntry("TitleBarTextAlignment", 1);
-	m_ui->cmbAlign->setCurrentIndex(alignment);
+    // 1 is centered (0 = left; 2 = right)
+    alignment = configGroup.readEntry("TitleBarTextAlignment", 1);
+    m_ui->cmbAlign->setCurrentIndex(alignment);
 
-        /*
-	// TABS
-	windowGrouping = configGroup.readEntry("UseWindowGrouping", false);
-	m_ui->chkGroup->setChecked(windowGrouping);
-	closeButtonsOnTabs = configGroup.readEntry("CloseButtonsOnTabs", true);
-	m_ui->chkCloseButtons->setChecked(closeButtonsOnTabs);
-	*/
+    /*
+    // TABS
+    windowGrouping = configGroup.readEntry("UseWindowGrouping", false);
+    m_ui->chkGroup->setChecked(windowGrouping);
+    closeButtonsOnTabs = configGroup.readEntry("CloseButtonsOnTabs", true);
+    m_ui->chkCloseButtons->setChecked(closeButtonsOnTabs);
+    */
 }
 
 // we need to save the configurations
 void IaOraConfig::save(KConfigGroup&)
 {
-	KConfigGroup configGroup(iaoraConfig, "Windeco");
+    KConfigGroup configGroup(iaoraConfig, "Windeco");
 
-	configGroup.writeEntry("BorderSize", m_ui->cmbBorderSize->currentIndex());
-	configGroup.writeEntry("TitleBarTextAlignment", m_ui->cmbAlign->currentIndex());
-	//configGroup.writeEntry("UseWindowGrouping", m_ui->chkGroup->isChecked());
-	//configGroup.writeEntry("CloseButtonsOnTabs", m_ui->chkCloseButtons->isChecked());
+    configGroup.writeEntry("BorderSize", m_ui->cmbBorderSize->currentIndex());
+    configGroup.writeEntry("TitleBarTextAlignment", m_ui->cmbAlign->currentIndex());
+    //configGroup.writeEntry("UseWindowGrouping", m_ui->chkGroup->isChecked());
+    //configGroup.writeEntry("CloseButtonsOnTabs", m_ui->chkCloseButtons->isChecked());
 
-	iaoraConfig->sync();
+    iaoraConfig->sync();
 }
 
 // simple the default configuration
 void IaOraConfig::defaults()
 {
-	m_ui->cmbBorderSize->setCurrentIndex(1);
-	m_ui->cmbAlign->setCurrentIndex(1);
-	//m_ui->chkGroup->setChecked(false);
-	//m_ui->chkCloseButtons->setChecked(true);
+    m_ui->cmbBorderSize->setCurrentIndex(1);
+    m_ui->cmbAlign->setCurrentIndex(1);
+    //m_ui->chkGroup->setChecked(false);
+    //m_ui->chkCloseButtons->setChecked(true);
 }
 
 #include "iaora_config.moc"

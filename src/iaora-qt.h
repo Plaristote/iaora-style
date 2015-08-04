@@ -27,33 +27,33 @@ class IaOraStyle;
 
 class Q_DECL_EXPORT IaOraQt : public QCommonStyle
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
-	IaOraQt(); 
-	~IaOraQt();
+    IaOraQt();
+    ~IaOraQt();
 
-	void drawPrimitive(PrimitiveElement element, const QStyleOption *option, QPainter *painter, const QWidget *widget = 0) const;
-	void drawControl(ControlElement element, const QStyleOption *option, QPainter *painter, const QWidget *widget = 0) const;
-	
-	virtual int pixelMetric(PixelMetric metric, const QStyleOption *option = 0, const QWidget *widget = 0 ) const;
-	
-	virtual void drawItemText(QPainter *painter, const QRect &rect, int alignment, const QPalette &pal,
-					  bool enabled, const QString& text, QPalette::ColorRole textRole) const;
-	virtual void drawComplexControl(ComplexControl control, const QStyleOptionComplex *option, QPainter *painter, const QWidget *widget = 0) const;
-	virtual int styleHint(StyleHint hint, const QStyleOption *option = 0, const QWidget *widget = 0, QStyleHintReturn *returnData = 0 ) const;
-	virtual QSize sizeFromContents(ContentsType type, const QStyleOption *option, const QSize &contentsSize, const QWidget *widget = 0) const;
-	
-	virtual QRect subControlRect(ComplexControl control, const QStyleOptionComplex *option, SubControl subControl, const QWidget *widget = 0) const;
-	virtual QRect subElementRect(SubElement element, const QStyleOption *option, const QWidget *widget) const;
+    void drawPrimitive(PrimitiveElement element, const QStyleOption *option, QPainter *painter, const QWidget *widget = 0) const;
+    void drawControl(ControlElement element, const QStyleOption *option, QPainter *painter, const QWidget *widget = 0) const;
 
-	void polish(QWidget *widget);
-	void unpolish(QWidget *widget);
+    virtual int pixelMetric(PixelMetric metric, const QStyleOption *option = 0, const QWidget *widget = 0) const;
+
+    virtual void drawItemText(QPainter *painter, const QRect &rect, int alignment, const QPalette &pal,
+                              bool enabled, const QString& text, QPalette::ColorRole textRole) const;
+    virtual void drawComplexControl(ComplexControl control, const QStyleOptionComplex *option, QPainter *painter, const QWidget *widget = 0) const;
+    virtual int styleHint(StyleHint hint, const QStyleOption *option = 0, const QWidget *widget = 0, QStyleHintReturn *returnData = 0) const;
+    virtual QSize sizeFromContents(ContentsType type, const QStyleOption *option, const QSize &contentsSize, const QWidget *widget = 0) const;
+
+    virtual QRect subControlRect(ComplexControl control, const QStyleOptionComplex *option, SubControl subControl, const QWidget *widget = 0) const;
+    virtual QRect subElementRect(SubElement element, const QStyleOption *option, const QWidget *widget) const;
+
+    void polish(QWidget *widget);
+    void unpolish(QWidget *widget);
 
 protected slots:
-	QIcon standardIconImplementation(StandardPixmap standardIcon, const QStyleOption *option, const QWidget *widget) const;
-	
+    QIcon standardIconImplementation(StandardPixmap standardIcon, const QStyleOption *option, const QWidget *widget) const;
+
 private:
-	IaOraStyle *m_style;
+    IaOraStyle *m_style;
 };
 
 #endif
