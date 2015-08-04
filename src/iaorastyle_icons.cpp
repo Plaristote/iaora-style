@@ -79,8 +79,8 @@ QIcon IaOraStyle::standardIcon(QStyle::StandardPixmap icon, const QStyleOption *
 
     //qDebug("Returning a pixmap of size %dx%d", s.width(), s.height());
     img = QImage(s, QImage::Format_ARGB32_Premultiplied);
-    img.fill(Qt::black); // it removes the blue ghost behind the icon
-    //img.fill(Qt::transparent);
+    //img.fill(Qt::black); // it removes the blue ghost behind the icon
+    img.fill(Qt::transparent);
     QPainter p(&img);
     QRect r = img.rect();
     r.adjust(margin, margin, -margin, -margin);
