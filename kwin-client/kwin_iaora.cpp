@@ -274,7 +274,7 @@ void IaOraDecorationButton::paintEvent(QPaintEvent */* event */)
 		case ShadeButton:
 			sp = deco->isShade() ? QStyle::SP_TitleBarUnshadeButton : QStyle::SP_TitleBarShadeButton;
 			break;
-		case ItemCloseButton:
+		//case ItemCloseButton:
 		case CloseButton:
 			sp = QStyle::SP_TitleBarCloseButton;
 			break;
@@ -291,8 +291,13 @@ void IaOraDecorationButton::paintEvent(QPaintEvent */* event */)
 
 	opt.palette.setColor(QPalette::Text, deco->options()->color(KCommonDecoration::ColorFont, opt.state & QStyle::State_Active));
 
-	icon = sp == QStyle::SP_CustomBase + 3 ? deco->icon().pixmap(16, 16) : style()->standardIcon(sp, &opt, this);
+        if (sp == QStyle::SP_CustomBase + 3) {
+            icon = deco->icon().pixmap(16, 16);
+        } else {
+            icon = style()->standardIcon(sp, &opt, this);
+        }
 
+        /*
 	if (type() == ItemCloseButton){ // special case for a tab close button
 		QPixmap pix;
 		QString key = QString("iaora_standard_pixmap_tab_%1_%2_%3").arg(QString::number(sp))
@@ -321,6 +326,7 @@ void IaOraDecorationButton::paintEvent(QPaintEvent */* event */)
 			icon = QIcon(pix);
 		}
 	}
+	*/
 
 	shift = opt.state & QStyle::State_Selected ? 1 : 0;
 	
@@ -350,8 +356,6 @@ void IaOraDecorationButton::paintEvent(QPaintEvent */* event */)
 
 	painter.setRenderHint(QPainter::Antialiasing, false);
 	painter.drawPixmap(opt.rect.topLeft() + QPoint(shift, shift) + QPoint(0, (opt.rect.height() / 2) - (pix.height() / 2)), pix);
-	//painter.drawPixmap(opt.rect.topLeft() + QPoint(shift, shift), pix);
-	//qDebug("Rect: %d %d %dx%d", rect().left(), rect().top(), rect().width(), rect().height());
 }
 
 void IaOraDecorationButton::enterEvent(QEvent *e)
@@ -373,8 +377,8 @@ void IaOraDecorationButton::leaveEvent(QEvent *e)
 /*-----------------------------------------------------------------------*/
 
 IaOraDecoration::IaOraDecoration(KDecorationBridge *bridge, KDecorationFactory *factory)
-	: KCommonDecorationUnstable(bridge, factory) // TABS
-	//: KCommonDecoration(bridge, factory)
+	/*: KCommonDecorationUnstable(bridge, factory) // TABS
+	//*/: KCommonDecoration(bridge, factory)
 {
 	/* */
 	clicking = dragging = false;
@@ -413,8 +417,8 @@ void IaOraDecoration::loadConfig()
 	KConfig *conf = new KConfig("iaorarc");
 	KConfigGroup configGroup(conf, "Windeco");
 
-	useWindowGrouping = configGroup.readEntry("UseWindowGrouping", false); // TABS
-	closeButtonsOnTabs = configGroup.readEntry("CloseButtonsOnTabs", true); // TABS
+	//useWindowGrouping = configGroup.readEntry("UseWindowGrouping", false); // TABS
+	//closeButtonsOnTabs = configGroup.readEntry("CloseButtonsOnTabs", true); // TABS
 	
 	borderSize = configGroup.readEntry("BorderSize", 1);
 
@@ -587,17 +591,22 @@ void IaOraDecoration::init()
 	if (contrastFrame) {
 		borderWidth += 1;
 	}
+	
 	KCommonDecoration::init();
-	if (wid.style()) widget()->setStyle(wid.style());
+	if (wid.style()) {
+            widget()->setStyle(wid.style());
+        }
+        
 	widget()->setAutoFillBackground(false);
 	widget()->setAttribute(Qt::WA_NoSystemBackground, true);
 	widget()->setAttribute(Qt::WA_OpaquePaintEvent, true);
 
-	if (useWindowGrouping)
-		widget()->setAcceptDrops(true); // TABS
+	//if (useWindowGrouping)
+	//	widget()->setAcceptDrops(true); // TABS
 
-	if (static_cast<const KDecorationUnstable *>(decoration())->compositingActive())
+	if (static_cast<const KDecorationUnstable *>(decoration())->compositingActive()) {
 		widget()->setAttribute(Qt::WA_PaintOnScreen, false); // Kwin problem with composite
+        }
 }
 
 
@@ -615,6 +624,7 @@ static inline QColor blend_color(const QColor &c0, const QColor &c1, qreal blend
 	);
 }
 
+/*
 // Helper function to draw a tab on the TitleBar
 void IaOraDecoration::drawTab(QPainter &painter, const QRect &rect, ClientGroupItem &item, bool border, bool active, bool dragging)
 { // TABS
@@ -731,6 +741,7 @@ void IaOraDecoration::drawTab(QPainter &painter, const QRect &rect, ClientGroupI
 		painter.drawText(labelRect, titleBarTextAlign | Qt::TextSingleLine, string);
 	painter.restore();
 }
+*/
 
 void IaOraDecoration::paintEvent(QPaintEvent */*event */)
 {
@@ -743,8 +754,8 @@ void IaOraDecoration::paintEvent(QPaintEvent */*event */)
 	option.titleBarState = option.state;
 	option.subControls = QStyle::SC_TitleBarLabel;
 
-	QList<ClientGroupItem> tabList = clientGroupItems(); // TABS
-	int tabCount = tabList.count(); // TABS
+	//QList<ClientGroupItem> tabList = clientGroupItems(); // TABS
+	//int tabCount = tabList.count(); // TABS
 
 	int borderSpace = borderWidth;
 
@@ -838,6 +849,7 @@ void IaOraDecoration::paintEvent(QPaintEvent */*event */)
 	QFontMetrics metrics(font);
 	QString string = metrics.elidedText(option.text, Qt::ElideRight, labelRect.width());
 
+        /*
 	// deleting unneeded close buttons
 	while ((tabCount < closeButtonsList.size()) || ((tabCount == 1) && (closeButtonsList.size() > 0))){
 		IaOraDecorationButton *button = closeButtonsList.takeFirst();
@@ -845,7 +857,9 @@ void IaOraDecoration::paintEvent(QPaintEvent */*event */)
 		button->hide();
 		button->deleteLater();
 	}
+	*/
 
+        /*
 	if (tabCount > 1){ // TABS
 		//painter.fillRect(option.rect.adjusted(0, 0, 0, 2), option.palette.color(QPalette::Window));
 
@@ -874,25 +888,27 @@ void IaOraDecoration::paintEvent(QPaintEvent */*event */)
 			tabRect.translate(tabRect.width() - 1, 0);
 		}
 	} else{ // NO TABBED WINDOW
-		// draw the title caption
-		// TODO use MDI code
-		painter.save();
-		qreal opacity = painter.opacity();
+        */
+	// draw the title caption
+	// TODO use MDI code
+	painter.save();
+	qreal opacity = painter.opacity();
 
-		if (option.state & QStyle::State_Active){
-			painter.setOpacity(opacity * 0.9);
-			painter.setPen(Qt::black);
-			painter.drawText(labelRect.adjusted(1, 1, 1, 1), titleBarTextAlign | Qt::TextSingleLine, string);
-			painter.setOpacity(opacity);
-		}
-
-		painter.setPen(options()->color(ColorFont, isActive()));
-	
-		painter.drawText(labelRect, titleBarTextAlign | Qt::TextSingleLine, string);
-		painter.restore();
+	if (option.state & QStyle::State_Active){
+		painter.setOpacity(opacity * 0.9);
+		painter.setPen(Qt::black);
+		painter.drawText(labelRect.adjusted(1, 1, 1, 1), titleBarTextAlign | Qt::TextSingleLine, string);
+		painter.setOpacity(opacity);
 	}
+
+	painter.setPen(options()->color(ColorFont, isActive()));
+	
+	painter.drawText(labelRect, titleBarTextAlign | Qt::TextSingleLine, string);
+	painter.restore();
+	//}
 }
 
+/*
 bool IaOraDecoration::eventFilter(QObject *object, QEvent *event) // TABS
 {
 	if (!useWindowGrouping)
@@ -928,7 +944,9 @@ bool IaOraDecoration::eventFilter(QObject *object, QEvent *event) // TABS
 
 	return state || KCommonDecorationUnstable::eventFilter(object, event);
 }
+*/
 
+/*
 int IaOraDecoration::itemClicked(const QPoint &point, bool between) // TABS
 {
 	QRect frame = widget()->frameGeometry();
@@ -958,7 +976,9 @@ int IaOraDecoration::itemClicked(const QPoint &point, bool between) // TABS
 	
 	return -1;
 }
+*/
 
+/*
 bool IaOraDecoration::mouseButtonPressEvent(QMouseEvent *event) // TABS
 {
 	clickPos = widget()->mapToParent(event->pos());
@@ -981,7 +1001,9 @@ bool IaOraDecoration::mouseButtonPressEvent(QMouseEvent *event) // TABS
 	clicking = false;
 	return false;
 }
+*/
 
+/*
 bool IaOraDecoration::mouseButtonReleaseEvent(QMouseEvent *event) // TABS
 {
 	releasePos = event->pos();
@@ -990,7 +1012,7 @@ bool IaOraDecoration::mouseButtonReleaseEvent(QMouseEvent *event) // TABS
 	
 	if ((clicking) && (item >= 0)){
 		clicking = false;
-		setVisibleClientGroupItem(item);
+		//setVisibleClientGroupItem(item);
 		
 		return true;
 	}
@@ -998,7 +1020,9 @@ bool IaOraDecoration::mouseButtonReleaseEvent(QMouseEvent *event) // TABS
 	clicking = false;
 	return false;
 }
+*/
 
+/*
 bool IaOraDecoration::mouseMoveEvent(QMouseEvent *event) // TABS
 {
 	QPoint point = event->pos();
@@ -1018,7 +1042,7 @@ bool IaOraDecoration::mouseMoveEvent(QMouseEvent *event) // TABS
 
 		// Create draggable tab pixmap
 		QList<ClientGroupItem> tabList = clientGroupItems();
-		const int tabCount = tabList.count();
+		//const int tabCount = tabList.count();
 		QRect frame(QPoint(0, 0), widget()->frameGeometry().size());
 		QRect titlebar(frame.topLeft(),
 				QSize(frame.width(), layoutMetric(LM_TitleEdgeTop) +
@@ -1076,7 +1100,9 @@ bool IaOraDecoration::mouseMoveEvent(QMouseEvent *event) // TABS
 
 	return false;
 }
+*/
 
+/*
 bool IaOraDecoration::dragEnterEvent(QDragEnterEvent *event) // TABS
 {
 	if ((event->source() != 0) && (event->source()->objectName() == "decoration widget")){
@@ -1092,21 +1118,27 @@ bool IaOraDecoration::dragEnterEvent(QDragEnterEvent *event) // TABS
 	
 	return false;
 }
+*/
 
+/*
 bool IaOraDecoration::dragMoveEvent(QDragMoveEvent *event) // TABS
 {
 	Q_UNUSED(event)
 
 	return false;
 }
+*/
 
+/*
 bool IaOraDecoration::dragLeaveEvent(QDragLeaveEvent *event) // TABS
 {
 	Q_UNUSED(event)
 
 	return false;
 }
+*/
 
+/*
 bool IaOraDecoration::dropEvent(QDropEvent *event) // TABS
 {
 	QPoint point = widget()->mapToParent(event->pos());
@@ -1133,6 +1165,7 @@ bool IaOraDecoration::dropEvent(QDropEvent *event) // TABS
 
 	return false;
 }
+*/
 
 /*-----------------------------------------------------------------------*/
 
@@ -1150,7 +1183,7 @@ IaOraDecorationFactory::~IaOraDecorationFactory()
 bool IaOraDecorationFactory::loadConfig()
 {
 	bool changed = false; // if no changes, just return false
-	bool wGrouping, cboTabs;
+	//bool wGrouping, cboTabs;
 	int alignment, brdrSize;
 
 	KConfig *conf = new KConfig("iaorarc");
@@ -1158,8 +1191,8 @@ bool IaOraDecorationFactory::loadConfig()
 
 	brdrSize = configGroup.readEntry("BorderSize", 1);
 	alignment = configGroup.readEntry("TitleBarTextAlignment", 1);
-	wGrouping = configGroup.readEntry("UseWindowGrouping", false); // TABS
-	cboTabs = configGroup.readEntry("CloseButtonsOnTabs", true); // TABS
+	//wGrouping = configGroup.readEntry("UseWindowGrouping", false); // TABS
+	//cboTabs = configGroup.readEntry("CloseButtonsOnTabs", true); // TABS
 
 	if (brdrSize != borderSize){
 		borderSize = brdrSize;
@@ -1169,6 +1202,7 @@ bool IaOraDecorationFactory::loadConfig()
 		alignFlag = alignment;
 		changed = true;
 	}
+	/*
 	if (wGrouping != useWindowGrouping){
 		useWindowGrouping = wGrouping;
 		changed = true;
@@ -1177,6 +1211,7 @@ bool IaOraDecorationFactory::loadConfig()
 		closeButtonsOnTabs = cboTabs;
 		changed = true;
 	}
+	*/
 
 	delete conf;
 
@@ -1233,8 +1268,8 @@ bool IaOraDecorationFactory::supports(Ability ability) const
 		case AbilityColorTitleBack:
 		case AbilityColorTitleFore:
 			return true;
-		case AbilityClientGrouping: // TABS
-			return useWindowGrouping;
+		//case AbilityClientGrouping: // TABS
+		//	return useWindowGrouping;
 		default:
 			return false;
 	}

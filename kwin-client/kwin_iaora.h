@@ -70,8 +70,8 @@ class IaOraDecorationButton : public KCommonDecorationButton
 
 class QStyleOption;
 
-class IaOraDecoration : public KCommonDecorationUnstable // TABS
-//class IaOraDecoration : public KCommonDecoration
+//class IaOraDecoration : public KCommonDecorationUnstable // TABS
+class IaOraDecoration : public KCommonDecoration
 {
 	Q_OBJECT
 
@@ -91,15 +91,15 @@ class IaOraDecoration : public KCommonDecorationUnstable // TABS
 		virtual void paintEvent(QPaintEvent *event);
 
 		// tabbing related
-		virtual bool eventFilter(QObject *object, QEvent *event);
-		int itemClicked(const QPoint &point, bool between = false);
-		bool mouseButtonPressEvent(QMouseEvent *event);
-		bool mouseButtonReleaseEvent(QMouseEvent *event);
-		bool mouseMoveEvent(QMouseEvent *event);
-		bool dragEnterEvent(QDragEnterEvent *event);
-		bool dragMoveEvent(QDragMoveEvent *event);
-		bool dragLeaveEvent(QDragLeaveEvent *event);
-		bool dropEvent(QDropEvent *event);
+		//virtual bool eventFilter(QObject *object, QEvent *event);
+		//int itemClicked(const QPoint &point, bool between = false);
+		//bool mouseButtonPressEvent(QMouseEvent *event);
+		//bool mouseButtonReleaseEvent(QMouseEvent *event);
+		//bool mouseMoveEvent(QMouseEvent *event);
+		//bool dragEnterEvent(QDragEnterEvent *event);
+		//bool dragMoveEvent(QDragMoveEvent *event);
+		//bool dragLeaveEvent(QDragLeaveEvent *event);
+		//bool dropEvent(QDropEvent *event);
 		//
 
 	protected:
@@ -112,11 +112,12 @@ class IaOraDecoration : public KCommonDecorationUnstable // TABS
 		void loadConfig();
 
 		// draw a tab for some application
-		void drawTab(QPainter &painter, const QRect &rect, ClientGroupItem &item, bool border, bool active, bool dragging = false); // TABS
+		//void drawTab(QPainter &painter, const QRect &rect, ClientGroupItem &item, bool border, bool active, bool dragging = false); // TABS
 		
 		// use tabbing feature?
-		bool useWindowGrouping; // TABS
-		bool closeButtonsOnTabs; // TABS
+		//bool useWindowGrouping; // TABS
+		//bool closeButtonsOnTabs; // TABS
+                
 		// what kind of border we're using
 		int borderSize;
 		// just the titlebar text alignment
@@ -144,8 +145,8 @@ class IaOraDecoration : public KCommonDecorationUnstable // TABS
 
 #include <kdecorationfactory.h>
 
-class IaOraDecorationFactory : public KDecorationFactoryUnstable // TABS
-//class IaOraDecorationFactory : public KDecorationFactory
+//class IaOraDecorationFactory : public KDecorationFactoryUnstable // TABS
+class IaOraDecorationFactory : public KDecorationFactory
 {
 	public:
 		IaOraDecorationFactory();
@@ -161,8 +162,8 @@ class IaOraDecorationFactory : public KDecorationFactoryUnstable // TABS
 	private:
 		int borderSize;
 		int alignFlag;
-		bool useWindowGrouping; // TABS
-		bool closeButtonsOnTabs; // TABS
+		//bool useWindowGrouping; // TABS
+		//bool closeButtonsOnTabs; // TABS
 
 };
 

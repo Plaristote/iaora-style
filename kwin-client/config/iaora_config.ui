@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>385</width>
-    <height>108</height>
+    <height>124</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -97,7 +97,7 @@
    <item row="2" column="0">
     <widget class="QCheckBox" name="chkGroup">
      <property name="enabled">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="text">
       <string>Enable window grouping</string>

@@ -20,7 +20,7 @@ add_subdirectory (src)
 add_subdirectory (color-schemes)
 add_subdirectory (test)
 
-#if (KDE4_FOUND)
-#	add_subdirectory (kwin-client)
-#endif (KDE4_FOUND)
+if (KDE4_FOUND)
+	add_subdirectory (kwin-client)
+endif (KDE4_FOUND)
 
