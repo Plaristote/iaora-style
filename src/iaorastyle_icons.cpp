@@ -20,7 +20,7 @@
 
 #include "iaorastyle.h"
 #include <QPixmapCache>
-#include <QApplication>
+#include <QtWidgets/QApplication>
 
 bool IaOraStyle::hasIcon(QStyle::StandardPixmap icon)
 {

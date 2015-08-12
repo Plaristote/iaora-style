@@ -22,37 +22,32 @@
 #include "iaorastyle.h"
 #include <QDebug>
 
-#include <QStyleOption>
-#include <QStyleOptionSpinBox>
+#include <QtWidgets/QStyleOption>
 #include <QPainter>
-#include <QComboBox>
-#include <QAbstractSpinBox>
-#include <QToolButton>
-#include <QDockWidget>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QToolButton>
+#include <QtWidgets/QDockWidget>
 
 /*-----------------------------------------------------------------------*/
 
 #include <QtGui/QStylePlugin>
 
-class IaOraStylePlugin : public QStylePlugin
-{
-public:
-    QStringList keys() const
+    QStringList IaOraStylePlugin::keys() const
     {
         return QString::fromUtf8("IaOra-Qt").split(QChar(',', 0));
     }
 
-    QStyle *create(const QString &key)
+    QStyle *IaOraStylePlugin::create(const QString &key)
     {
         if (key.toLower() == QString::fromUtf8("iaora-qt")) {
             return new IaOraQt;
         }
         return 0;
     }
-};
 
 
-Q_EXPORT_PLUGIN2(iaora - qt, IaOraStylePlugin)
+
+//Q_EXPORT_PLUGIN2(iaora - qt, IaOraStylePlugin)
 
 /*-----------------------------------------------------------------------*/
 
@@ -380,10 +375,6 @@ void IaOraQt::drawComplexControl(ComplexControl control, const QStyleOptionCompl
         m_style->drawTitleBar(option, painter, widget);
         break;
     }
-    case CC_Q3ListView: {
-        m_style->drawQ3ListView(option, painter, widget);
-        break;
-    }
     //case CC_ScrollBar: // this will not be drawed here
     case CC_ToolButton: {
         QDockWidget *dockWidget;
@@ -446,7 +437,7 @@ QIcon IaOraQt::standardIconImplementation(QStyle::StandardPixmap standardIcon, c
     if (m_style->hasIcon(standardIcon))
         return m_style->standardIcon(standardIcon, option, widget);
 
-    return QCommonStyle::standardIconImplementation(standardIcon, option, widget);
+    return QCommonStyle::standardIcon(standardIcon, option, widget);
 }
 
 QRect IaOraQt::subControlRect(ComplexControl control, const QStyleOptionComplex *option, SubControl subControl, const QWidget *widget) const
@@ -490,5 +481,3 @@ QRect IaOraQt::subElementRect(SubElement element, const QStyleOption *option, co
 
     return r;
 }
-
-#include "iaora-qt.moc"

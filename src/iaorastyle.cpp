@@ -21,7 +21,6 @@
 #include "iaorastyle.h"
 
 #include <QSettings>
-#include <QDebug>
 
 QHash<QString, ColorData*> IaOraStyle::m_data;
 

@@ -19,7 +19,6 @@
  */
 
 #include <QVarLengthArray>
-#include <QDebug>
 
 #include "iaorastyle.h"
 

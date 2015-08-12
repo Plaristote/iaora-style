@@ -21,7 +21,18 @@
 #ifndef IAORA_QT_H
 #define IAORA_QT_H
 
-#include <QCommonStyle>
+#include <QtWidgets/QCommonStyle>
+#include <QtWidgets/QStylePlugin>
+
+class IaOraStylePlugin : public QStylePlugin
+{
+  Q_OBJECT
+  Q_PLUGIN_METADATA(IID "iaora - qt" FILE "iaora.json")
+  
+public:
+    QStringList keys() const;
+    QStyle *create(const QString &key);
+};
 
 class IaOraStyle;
 

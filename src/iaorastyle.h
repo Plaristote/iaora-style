@@ -25,10 +25,10 @@
 #include <QRect>
 #include <QPalette>
 #include <QIcon>
-#include <QStyle>
+#include <QtWidgets/QStyle>
 #include <QPainter>
-#include <QStyleOption>
-#include <QStyle>
+#include <QtWidgets/QStyleOption>
+#include <QtWidgets/QStyle>
 #include <QHash>
 
 typedef struct {

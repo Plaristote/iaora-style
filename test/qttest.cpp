@@ -4,7 +4,6 @@
 
 #include <QAction>
 #include <QString>
-#include <QToolBar>
 #include <QStyleFactory>
 
 #include <KIcon>

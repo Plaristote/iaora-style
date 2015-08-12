@@ -22,14 +22,11 @@
 #include "iaorastyle.h"
 
 #include <QStyleOption>
-#include <QStyleOptionSpinBox>
 #include <QPainter>
 #include <QComboBox>
-#include <QAbstractSpinBox>
 #include <QToolButton>
 #include <QDockWidget>
 #include <QDebug>
-#include <QToolBar>
 
 K_EXPORT_STYLE("IaOraKde", IaOraKde)
 
