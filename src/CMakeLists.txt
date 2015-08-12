@@ -1,4 +1,4 @@
-project (kstyle-iaora)
+project (style-iaora)
 
 set (STYLE_SOURCES iaorastyle.cpp 
     iaorastyle_button.cpp 
