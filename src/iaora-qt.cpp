@@ -20,6 +20,7 @@
 
 #include "iaora-qt.h"
 #include "iaorastyle.h"
+
 #include <QDebug>
 
 #include <QtWidgets/QStyleOption>
@@ -27,27 +28,23 @@
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QDockWidget>
+#include <QtGui/QStylePlugin>
 
 /*-----------------------------------------------------------------------*/
 
-#include <QtGui/QStylePlugin>
+QStringList IaOraStylePlugin::keys() const
+{
+  //QString::fromUtf8("IaOra-Qt").split(QChar(',', 0));
+  return QStringList() << "IaOra-Qt"; 
+}
 
-    QStringList IaOraStylePlugin::keys() const
-    {
-        return QString::fromUtf8("IaOra-Qt").split(QChar(',', 0));
-    }
-
-    QStyle *IaOraStylePlugin::create(const QString &key)
-    {
-        if (key.toLower() == QString::fromUtf8("iaora-qt")) {
-            return new IaOraQt;
-        }
-        return 0;
-    }
-
-
-
-//Q_EXPORT_PLUGIN2(iaora - qt, IaOraStylePlugin)
+QStyle *IaOraStylePlugin::create(const QString &key)
+{
+  if (key.toLower() == "iaora-qt") {
+    return new IaOraQt;  
+  }
+  return 0;
+}
 
 /*-----------------------------------------------------------------------*/
 
