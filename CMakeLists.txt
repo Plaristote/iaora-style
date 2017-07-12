@@ -13,7 +13,6 @@ include(KDEInstallDirs)
 
 add_subdirectory (src)
 add_subdirectory (color-schemes)
-#add_subdirectory (test)
 
 #if (KDE4_FOUND)
 #	add_subdirectory (kwin-client)

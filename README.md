@@ -1,20 +1,16 @@
-=== Installing IaOra ===
+IaOra
+====================
 
-*** Installation ***
+description...
 
-Installation from source requires CMake.  To install, type the following at
-the shell prompt within the package directory.  
-Note that you are prompted for the root password during installation.
+url...
 
-	sh install.sh
+Installation from source
+------------------------
 
-
-*** Deinstallation ***
-
-To uninstall, type the following at the shell prompt within the directory
-from which you installed.  If you deleted that directory, just install it
-again.  Again, you are prompted for the root password.
-
-	sh uninstall.sh
-
-
+    mkdir build
+    cd build
+    cmake -DKDE_INSTALL_USE_QT_SYS_PATHS=ON -DCMAKE_INSTALL_PREFIX=`kf5-config --prefix` ..
+    make
+    sudo make install
+    kbuildsycoca5

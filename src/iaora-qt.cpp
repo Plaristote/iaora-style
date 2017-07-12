@@ -34,13 +34,12 @@
 
 QStringList IaOraStylePlugin::keys() const
 {
-  //QString::fromUtf8("IaOra-Qt").split(QChar(',', 0));
-  return QStringList() << "IaOra-Qt"; 
+  return QStringList() << "IaOra"; 
 }
 
 QStyle *IaOraStylePlugin::create(const QString &key)
 {
-  if (key.toLower() == "iaora-qt") {
+  if (key.toLower() == "iaora") {
     return new IaOraQt;  
   }
   return 0;
