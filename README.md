@@ -3,7 +3,7 @@ IaOra
 
 The old Mandriva's IaOra theme ported to Qt5...actually just the style, not the window decoration.
 
-[url]
+https://store.kde.org/p/1183616/
 
 Installation from source
 ------------------------
