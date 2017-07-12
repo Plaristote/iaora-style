@@ -1,3 +1,8 @@
+** 12-07-2017 0.3.3 beta **
+
+12-08-2015 - Caig
+- Style ported to Qt5
+
 01-06-2010 - Rodrigo
 - Changed alternate color to gray0 (according IaOra specs)
 
@@ -15,6 +20,7 @@
 - Drawing elided text on dockwidget titlebars
 
 ** 12-04-2010 0.3.0 **
+
 09-04-2010 - Rodrigo
 - Fix TitleBar font size problem (#58582)
 - Added borders to comboboxes (#57664)
@@ -32,12 +38,12 @@
 - Added option to change TitleBar text alignment (bug #57056)
 - Added option to enable window grouping (not enabled until finished)
 
-** 12 02 2010 0.2.5.6
+** 12-02-2010 0.2.5.6 **
 
 09-02-2010 - Rodrigo
 - Some components now are left colored when the window lost the focus
 
-** 05 02 2010 0.2.5.5
+** 05-02-2010 0.2.5.5 **
 
 04-02-2010 - Rodrigo
 - Now, the arrows look like real arrows
@@ -56,16 +62,18 @@
 13-01-2010 - Rodrigo
 - Fix the color painting on PanelItemViewRow (Bug # 56883)
 
-** 01 09 2009 0.2.5.4
+** 01-09-2009 0.2.5.4 **
+
 08-01-2010 - Rodrigo
 - Fix the highligh problem with ItemViewItems (Bug # 56883)
 - Now, the application name on the titlebar is centered
 
-** 01 05 2009 0.2.5.3
+** 01-05-2009 0.2.5.3 **
+
 01-05-2009 Nlecureuil
 - Fix crash in Quassel (Bug # 55641) ( the previous fix was only in iaora-kde )
 
-**  01-01-2010 2009 0.2.5.2**
+**  01-01-2010 2009 0.2.5.2 **
 
 18-12-2009 - Nlecureuil
 - Fix minimum size for the scrollbar slider

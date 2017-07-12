@@ -1,9 +1,9 @@
 IaOra
 ====================
 
-description...
+The old Mandriva's IaOra theme ported to Qt5...actually just the style, not the window decoration.
 
-url...
+[url]
 
 Installation from source
 ------------------------
