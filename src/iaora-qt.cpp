@@ -28,7 +28,7 @@
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QDockWidget>
-#include <QtGui/QStylePlugin>
+#include <QtWidgets/QStylePlugin>
 
 /*-----------------------------------------------------------------------*/
 

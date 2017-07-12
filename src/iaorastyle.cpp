@@ -170,7 +170,7 @@ void IaOraStyle::drawBranch(const QStyleOption *option, QPainter *painter)
 
 void IaOraStyle::drawPanelItemViewItem(const QStyleOption *opt, QPainter *p, bool itemViewItem)
 {
-    const QStyleOptionViewItemV4 *pvi = qstyleoption_cast<const QStyleOptionViewItemV4 *>(opt);
+    const QStyleOptionViewItem *pvi = qstyleoption_cast<const QStyleOptionViewItem *>(opt);
     if (!pvi)
         return;
     else
@@ -295,7 +295,7 @@ void IaOraStyle::drawPanelItemViewItem(const QStyleOption *opt, QPainter *p, boo
 
 void IaOraStyle::drawPanelItemViewRow(const QStyleOption *opt, QPainter *p)
 {
-    const QStyleOptionViewItemV4 *row = qstyleoption_cast<const QStyleOptionViewItemV4 *>(opt);
+    const QStyleOptionViewItem *row = qstyleoption_cast<const QStyleOptionViewItem *>(opt);
 
     if (!row)
         return;

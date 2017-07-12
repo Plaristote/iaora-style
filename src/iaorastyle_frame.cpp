@@ -170,15 +170,12 @@ void IaOraStyle::drawFrame(const QStyleOption *option, QPainter *p, FrameType ty
         p->save();
 
         const QStyleOptionFrame *frame = qstyleoption_cast<const QStyleOptionFrame *>(option);
-        const QStyleOptionFrameV2 *frame2 = qstyleoption_cast<const QStyleOptionFrameV2 *>(option);
+        //const QStyleOptionFrameV2 *frame2 = qstyleoption_cast<const QStyleOptionFrameV2 *>(option);
 
         if (!frame)
             return;
 
-        bool flat = false;
-        if (frame2)
-            flat = (frame2->features & QStyleOptionFrameV2::Flat);
-
+        bool flat = (frame->features & QStyleOptionFrameV2::Flat);
         bool sunken = (frame->state & QStyle::State_Sunken);
         bool raised = (frame->state & QStyle::State_Raised);
 

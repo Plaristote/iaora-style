@@ -149,19 +149,19 @@ void IaOraStyle::drawTabBarTab(const QStyleOption *opt, QPainter *p)
 
     // The code below is based on the implementation of QCommonStyle;
     // check the copyright on the top of this file
-    QStyleOptionTabV2 tabV2(*tab);
-    QRect tabRect = tabV2.rect;
+    QStyleOptionTab styleOptionTab(*tab);
+    QRect tabRect = styleOptionTab.rect;
 
     // we have the vertical tab text
-    bool verticalTabs = tabV2.shape == QTabBar::RoundedEast
-                        || tabV2.shape == QTabBar::RoundedWest
-                        || tabV2.shape == QTabBar::TriangularEast
-                        || tabV2.shape == QTabBar::TriangularWest;
+    bool verticalTabs = styleOptionTab.shape == QTabBar::RoundedEast
+                        || styleOptionTab.shape == QTabBar::RoundedWest
+                        || styleOptionTab.shape == QTabBar::TriangularEast
+                        || styleOptionTab.shape == QTabBar::TriangularWest;
     if (verticalTabs) {
         p->save();
 
         int newX, newY, newRot;
-        if (tabV2.shape == QTabBar::RoundedEast || tabV2.shape == QTabBar::TriangularEast) {
+        if (styleOptionTab.shape == QTabBar::RoundedEast || styleOptionTab.shape == QTabBar::TriangularEast) {
             newX = tabRect.width();
             newY = tabRect.y();
             newRot = 90;
@@ -180,20 +180,20 @@ void IaOraStyle::drawTabBarTab(const QStyleOption *opt, QPainter *p)
     }
 
     // and the icon
-    QSize iconSize = tabV2.iconSize;
+    QSize iconSize = styleOptionTab.iconSize;
 
-    if (!tabV2.icon.isNull()) {
+    if (!styleOptionTab.icon.isNull()) {
         if (!iconSize.isValid()) {
             int iconExtent = m_parent->pixelMetric(QStyle::PM_SmallIconSize);
             iconSize = QSize(iconExtent, iconExtent);
         }
 
-        QPixmap tabIcon = tabV2.icon.pixmap(iconSize, (tabV2.state & QStyle::State_Enabled) ? QIcon::Normal : QIcon::Disabled);
+        QPixmap tabIcon = styleOptionTab.icon.pixmap(iconSize, (styleOptionTab.state & QStyle::State_Enabled) ? QIcon::Normal : QIcon::Disabled);
 
         QRect iconRect = QRect(tabRect.left() + 6, tabRect.center().y() - tabIcon.height() / 2, iconSize.width(), iconSize.height());
 
-        if (tabV2.direction != Qt::LeftToRight) {
-            iconRect = QStyle::visualRect(tabV2.direction, tabV2.rect, iconRect);
+        if (styleOptionTab.direction != Qt::LeftToRight) {
+            iconRect = QStyle::visualRect(styleOptionTab.direction, styleOptionTab.rect, iconRect);
             tabRect.setRight(tabRect.right() - iconSize.width() - 4);
         } else
             tabRect.setLeft(tabRect.left() + iconSize.width() + 4);
@@ -203,13 +203,13 @@ void IaOraStyle::drawTabBarTab(const QStyleOption *opt, QPainter *p)
 
     // finally draw the text
     QRect textRect = tabRect;
-    QFontMetrics fontMetrics = tabV2.fontMetrics;
+    QFontMetrics fontMetrics = styleOptionTab.fontMetrics;
 
     QSize textSize = fontMetrics.size(Qt::TextSingleLine, tab->text);
 
     // we must adjust the textRect if we have a close button on the tabbar
-    if ((!tabV2.icon.isNull()) && (tabRect.width() - (textSize.width() + iconSize.width()) > 8)) {
-        if (tabV2.direction == Qt::LeftToRight)
+    if ((!styleOptionTab.icon.isNull()) && (tabRect.width() - (textSize.width() + iconSize.width()) > 8)) {
+        if (styleOptionTab.direction == Qt::LeftToRight)
             textRect.adjust(-10, 0, -10, 0);
         else
             textRect.adjust(+10, 0, +10, 0);

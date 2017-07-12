@@ -34,8 +34,8 @@ void IaOraStyle::drawProgressBarContents(const QStyleOption *opt, QPainter *p, b
 
     p->save();
     QRect r = pb->rect;
-    bool vertical = false;
-    bool inverted = false;
+    bool vertical = (pb->orientation == Qt::Vertical);
+    bool inverted = pb->invertedAppearance;
     qint64 minimum = qint64(pb->minimum);
     qint64 maximum = qint64(pb->maximum);
     qint64 progress = qint64(pb->progress);
@@ -45,13 +45,6 @@ void IaOraStyle::drawProgressBarContents(const QStyleOption *opt, QPainter *p, b
 
     if (maximum == minimum || progress <= minimum) // indeterminate state
         return;
-
-    // Get extra style options if version 2
-    const QStyleOptionProgressBarV2 *pb2 = qstyleoption_cast<const QStyleOptionProgressBarV2 *>(opt);
-    if (pb2) {
-        vertical = (pb2->orientation == Qt::Vertical);
-        inverted = pb2->invertedAppearance;
-    }
 
     // If the orientation is vertical, we use a transform to rotate
     // the progress bar 90 degrees clockwise.  This way we can use the
