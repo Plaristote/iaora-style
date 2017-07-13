@@ -119,7 +119,7 @@ void IaOraStyle::drawSymbol(const QStyleOption *opt, QPainter *p, Symbol s)
     case SymbolArrowUp: {
         QPoint points[3];
         points[0] = center + QPoint(0, -3);
-        points[1] = points[0] + QPoint(-4, 5);
+        points[1] = points[0] + QPoint(-4, 4);
         points[2] = points[0] + QPoint(4, 4);
 
         p->setPen(Qt::NoPen);
@@ -130,7 +130,7 @@ void IaOraStyle::drawSymbol(const QStyleOption *opt, QPainter *p, Symbol s)
     case SymbolArrowDown: {
         QPoint points[3];
         points[0] = center + QPoint(0, 3);
-        points[1] = points[0] + QPoint(-3, -4);
+        points[1] = points[0] + QPoint(-4, -4);
         points[2] = points[0] + QPoint(4, -4);
 
         p->setPen(Qt::NoPen);
