@@ -1,7 +1,7 @@
 IaOra
 ====================
 
-The old Mandriva's IaOra theme ported to Qt5...actually just the style, not the window decoration.
+The old Mandriva's IaOra widget style ported to Qt5.
 
 https://store.kde.org/p/1183616/
 
