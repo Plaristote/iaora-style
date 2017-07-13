@@ -10,7 +10,7 @@ Installation from source
 
     mkdir build
     cd build
-    cmake -DKDE_INSTALL_USE_QT_SYS_PATHS=ON -DCMAKE_INSTALL_PREFIX=`kf5-config --prefix` ..
+    cmake ..
     make
     sudo make install
-    kbuildsycoca5
+    
