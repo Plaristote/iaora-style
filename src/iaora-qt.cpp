@@ -109,6 +109,9 @@ void IaOraQt::drawPrimitive(PrimitiveElement element, const QStyleOption *option
     case QStyle::PE_PanelMenuBar:
         m_style->drawFrame(option, painter, IaOraStyle::FrameMenuBar);
         break;
+    case QStyle::PE_PanelMenu:
+        m_style->drawFrame(option, painter, IaOraStyle::FrameMenu);
+        break;
     case QStyle::PE_FrameGroupBox:
         m_style->drawFrame(option, painter, IaOraStyle::FrameGroupBox);
         break;

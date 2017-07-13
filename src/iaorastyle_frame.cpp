@@ -151,6 +151,9 @@ void IaOraStyle::drawFrame(const QStyleOption *option, QPainter *p, FrameType ty
         break;
     }
     case FrameMenu: {
+        QRect contents = r.adjusted(1, 1, -1, -1);
+        p->fillRect(contents, data->gray[0]);
+
         drawFrameCuttingOne(p, r, enabled ? data->gray[5] : data->gray[4]);
         break;
     }
