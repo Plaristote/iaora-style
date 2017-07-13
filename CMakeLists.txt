@@ -6,15 +6,11 @@ set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
 set(CMAKE_AUTOMOC ON)
 set (CMAKE_INCLUDE_CURRENT_DIR ON)
-    
+
+include (KDEInstallDirs)
+  
 find_package (KF5)
-find_package(Qt5 REQUIRED COMPONENTS Widgets Core)
-include(KDEInstallDirs)
+find_package (Qt5 REQUIRED COMPONENTS Widgets Core)
 
 add_subdirectory (src)
 add_subdirectory (color-schemes)
-
-#if (KDE4_FOUND)
-#	add_subdirectory (kwin-client)
-#endif (KDE4_FOUND)
-
