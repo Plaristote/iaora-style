@@ -1,3 +1,9 @@
+** 14-07-2017 0.3.5 beta **
+
+13-07-2017 - Caig
+- Fixed Plasma popupmenu background bug
+- Fixed scrollbar arrow up
+
 ** 12-07-2017 0.3.4 beta **
 
 12-08-2015 - Caig
@@ -70,15 +76,15 @@
 
 ** 01-05-2009 0.2.5.3 **
 
-01-05-2009 Nlecureuil
-- Fix crash in Quassel (Bug # 55641) ( the previous fix was only in iaora-kde )
+01-05-2009 - Nlecureuil
+- Fix crash in Quassel (Bug # 55641) (the previous fix was only in iaora-kde)
 
-**  01-01-2010 2009 0.2.5.2 **
+** 01-01-2010 2009 0.2.5.2 **
 
 18-12-2009 - Nlecureuil
 - Fix minimum size for the scrollbar slider
 
-**  ??? ?? 2009 0.2.5.1**
+** ??? ?? 2009 0.2.5.1 **
 
 07-12-2009 - Nlecureuil
 - Install iaoracolors in /etc
@@ -101,7 +107,7 @@ TODO: choose where to install the config file
 - Changed from gradient to flat colors on an ItemViewItem
 - Added code to handle an ItemViewRow
 
-27-10-2009 Rodrigo
+27-10-2009 - Rodrigo
 - Fixed IaOra color schemes
 - Added IaOraSteel color scheme
 - Added IaOraNight color scheme
@@ -109,7 +115,7 @@ TODO: choose where to install the config file
 - Fixed inactive TitleBar drawing
 - Fixed TitleBar buttons
 
-26-10-2009 Rodrigo
+26-10-2009 - Rodrigo
 - Fixed kwin border
 - Fixed submenu arrow drawing when mouse over
 - Fixed EditLine drawing on Amarok
