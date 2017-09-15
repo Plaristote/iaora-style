@@ -1,13 +1,18 @@
-** 14-07-2017 0.3.5 beta **
+0.3.5.1
+-----
+* Fixed cmake config
+* Removed deprecated code
 
-13-07-2017 - Caig
-- Fixed Plasma popupmenu background bug
-- Fixed scrollbar arrow up
+0.3.5 beta
+-----
+* Fixed Plasma popupmenu background bug
+* Fixed scrollbar arrow up
 
-** 12-07-2017 0.3.4 beta **
+0.3.4 beta
+-----
+* Style ported to Qt5
 
-12-08-2015 - Caig
-- Style ported to Qt5
+-----Old changelog-----
 
 01-06-2010 - Rodrigo
 - Changed alternate color to gray0 (according IaOra specs)
@@ -120,4 +125,3 @@ TODO: choose where to install the config file
 - Fixed submenu arrow drawing when mouse over
 - Fixed EditLine drawing on Amarok
 - Fixed text color on TabBars
-
