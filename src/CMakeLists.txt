@@ -19,7 +19,7 @@ set (STYLE_SOURCES iaorastyle.cpp
 set (iaora-qt_SOURCES iaora-qt.cpp ${STYLE_SOURCES})
 
 add_library (iaora-qt SHARED ${iaora-qt_SOURCES})
-target_link_libraries (iaora-qt Qt5::Core Qt5::Gui)
+target_link_libraries (iaora-qt Qt5::Core Qt5::Widgets)
     
 get_target_property(REAL_QMAKE_EXECUTABLE ${Qt5Core_QMAKE_EXECUTABLE} IMPORTED_LOCATION)
 execute_process(COMMAND "${REAL_QMAKE_EXECUTABLE}" -query QT_INSTALL_PLUGINS

@@ -201,9 +201,9 @@ void IaOraStyle::drawPanelItemViewItem(const QStyleOption *opt, QPainter *p, boo
         QRect checkRect;
         QRect iconRect;
         QSize iconSize = pvi->decorationSize;
-        bool hasCheck = pvi->features & QStyleOptionViewItemV2::HasCheckIndicator;
-        bool hasIcon = pvi->features & QStyleOptionViewItemV2::HasDecoration;
-        bool hasText = pvi->features & QStyleOptionViewItemV2::HasDisplay;
+        bool hasCheck = pvi->features & QStyleOptionViewItem::HasCheckIndicator;
+        bool hasIcon = pvi->features & QStyleOptionViewItem::HasDecoration;
+        bool hasText = pvi->features & QStyleOptionViewItem::HasDisplay;
         bool leftToRight = (pvi->direction == Qt::LeftToRight) ? true : false;
 
         // the checkbox on the item
@@ -301,7 +301,7 @@ void IaOraStyle::drawPanelItemViewRow(const QStyleOption *opt, QPainter *p)
         return;
 
     ColorData *data = lookupData(opt->palette);
-    bool alternateColor = row->features & QStyleOptionViewItemV2::Alternate;
+    bool alternateColor = row->features & QStyleOptionViewItem::Alternate;
 
     p->save();
     p->setRenderHint(QPainter::Antialiasing);
