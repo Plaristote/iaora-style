@@ -20,8 +20,6 @@
 
 #include "iaorastyle.h"
 
-#include <QSettings>
-
 QHash<QString, ColorData*> IaOraStyle::m_data;
 
 IaOraStyle::IaOraStyle(QStyle *parent)
@@ -57,18 +55,14 @@ ColorData *IaOraStyle::lookupData(const QPalette &pal)
     data->black = Qt::black;
     data->white = Qt::white;
 
-    QSettings conf("/etc/iaoracolors", QSettings::NativeFormat); // TODO: define where this file must go
-
-    if (background.name() == "#eff3f7") {
-        conf.beginGroup("Default");
-        data->gray[0] = (conf.value("gray0", background)).value<QColor>();
-        data->gray[1] = (conf.value("gray1", background.dark(107))).value<QColor>();
-        data->gray[2] = (conf.value("gray2", background.dark(115))).value<QColor>();
-        data->gray[3] = (conf.value("gray3", background.dark(117))).value<QColor>();
-        data->gray[4] = (conf.value("gray4", background.dark(131))).value<QColor>();
-        data->gray[5] = (conf.value("gray5", background.dark(144))).value<QColor>();
-        data->gray[6] = (conf.value("gray6", background.dark(178))).value<QColor>();
-        conf.endGroup();
+    if (background.name() == "#eff3f7") { //default
+        data->gray[0] = QColor("#EFF3F7");
+        data->gray[1] = QColor("#DFE7EF");
+        data->gray[2] = QColor("#CFD7DF");
+        data->gray[3] = QColor("#C7D3DF");
+        data->gray[4] = QColor("#B6C3CF");
+        data->gray[5] = QColor("#A6B2C7");
+        data->gray[6] = QColor("#8692A6");
     } else {
         data->gray[0] = background;
         data->gray[1] = background.dark(107);
@@ -79,24 +73,48 @@ ColorData *IaOraStyle::lookupData(const QPalette &pal)
         data->gray[6] = background.dark(178);
     }
 
-    QString group = "";
-
-    if (highlight.name() == "#8ec7ff") group = "Arctic";
-    else if (highlight.name() == "#4965ae") group = "Blue";
-    else if (highlight.name() == "#cfd7df") group = "Gray";
-    else if (highlight.name() == "#5d658e") group = "Night";
-    else if (highlight.name() == "#f7b610") group = "Orange";
-    else if (highlight.name() == "#7baae7") group = "Smooth";
-    else if (highlight.name() == "#148dcd") group = "Steel";
-
-    if (!group.isEmpty()) {
-        conf.beginGroup(group);
-        data->color[0] = (conf.value("color0", highlight.light(150))).value<QColor>();
-        data->color[1] = (conf.value("color1", highlight.light(137))).value<QColor>();
-        data->color[2] = (conf.value("color2", highlight)).value<QColor>();
-        data->color[3] = (conf.value("color3", highlight.light(112))).value<QColor>();
-        data->color[4] = (conf.value("color4", highlight.light(130))).value<QColor>();
-        conf.endGroup();
+    if (highlight.name() == "#8ec7ff") { //Arctic
+        data->color[0] = QColor("#EFF7FF");
+        data->color[1] = QColor("#C7DFFF");
+        data->color[2] = QColor("#8EC7FF");
+        data->color[3] = QColor("#79BEFF");
+        data->color[4] = QColor("#69B6FF");
+    } else if (highlight.name() == "#4965ae") {//Blue
+        data->color[0] = QColor("#A6B6E7");
+        data->color[1] = QColor("#8EA2CF");
+        data->color[2] = QColor("#4965AE");
+        data->color[3] = QColor("#415DA6");
+        data->color[4] = QColor("#21459C");
+    } else if (highlight.name() == "#cfd7df") { //Gray
+        data->color[0] = QColor("#DFE7EF");
+        data->color[1] = QColor("#CFD7DF");
+        data->color[2] = QColor("#C7D3DF");
+        data->color[3] = QColor("#B6C3CF");
+        data->color[4] = QColor("#A6B2C7");
+    } else if (highlight.name() == "#5d658e") { //Night
+        data->color[0] = QColor("#ACB9EA");
+        data->color[1] = QColor("#808DC6");
+        data->color[2] = QColor("#5D658E");
+        data->color[3] = QColor("#3D4467");
+        data->color[4] = QColor("#272F4F");
+    } else if (highlight.name() == "#f7b610") { //Orange
+        data->color[0] = QColor("#FFDF10");
+        data->color[1] = QColor("#FFCB10");
+        data->color[2] = QColor("#F7B610");
+        data->color[3] = QColor("#FFA208");
+        data->color[4] = QColor("#F79600");
+    } else if (highlight.name() == "#7baae7") { //Smooth
+        data->color[0] = QColor("#CEE3FF");
+        data->color[1] = QColor("#ADCFFF");
+        data->color[2] = QColor("#7BAAE7");
+        data->color[3] = QColor("#5A8AD6");
+        data->color[4] = QColor("#427DC6");
+    } else if (highlight.name() == "#148dcd") { //Steel
+        data->color[0] = QColor("#A2DBE3");
+        data->color[1] = QColor("#3BBECF");
+        data->color[2] = QColor("#158CCD");
+        data->color[3] = QColor("#056EA3");
+        data->color[4] = QColor("#0A3453");
     } else {
         data->color[0] = highlight.light(150);
         data->color[1] = highlight.light(137);
