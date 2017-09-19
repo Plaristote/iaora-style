@@ -21,18 +21,17 @@
 #include "iaorastyle.h"
 
 void IaOraStyle::drawFrame(const QStyleOption *option, QPainter *p, FrameType type, QRect optRect)
-//void IaOraStyle::drawFrame(const QStyleOption *option, QPainter *p, FrameType type)
 {
     ColorData *data = lookupData(option->palette);
 
     bool enabled = (option->state & QStyle::State_Enabled);
 
     QRect r;
-    if (optRect.isValid())
+    if (optRect.isValid()) {
         r = optRect;
-    else
+    } else {
         r = option->rect;
-    //QRect r = option->rect;
+    }
 
     int top = r.top(), left = r.left(), bottom = r.bottom(), right = r.right();
     QPen oldPen = p->pen();
