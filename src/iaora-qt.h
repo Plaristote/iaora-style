@@ -26,9 +26,9 @@
 
 class IaOraStylePlugin : public QStylePlugin
 {
-  Q_OBJECT
-  Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QStyleFactoryInterface" FILE "iaora.json")
-  
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QStyleFactoryInterface" FILE "iaora.json")
+
 public:
     QStringList keys() const;
     QStyle *create(const QString &key);

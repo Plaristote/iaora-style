@@ -327,7 +327,7 @@ void IaOraStyle::drawHandle(const QStyleOption *opt, QPainter *p)
     }
 
     // draw all dots
-    foreach(QPoint dot, dots) {
+    foreach (QPoint dot, dots) {
         int x = dot.x(), y = dot.y();
 
         // draw the first color

@@ -34,15 +34,15 @@
 
 QStringList IaOraStylePlugin::keys() const
 {
-  return QStringList() << "IaOra"; 
+    return QStringList() << "IaOra";
 }
 
 QStyle *IaOraStylePlugin::create(const QString &key)
 {
-  if (key.toLower() == "iaora") {
-    return new IaOraQt;  
-  }
-  return 0;
+    if (key.toLower() == "iaora") {
+        return new IaOraQt;
+    }
+    return 0;
 }
 
 /*-----------------------------------------------------------------------*/
