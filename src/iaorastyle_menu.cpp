@@ -19,6 +19,7 @@
  */
 
 #include "iaorastyle.h"
+#include <QRegularExpression>
 
 void IaOraStyle::drawMenuItem(const QStyleOption *opt, QPainter *p, bool saveSpaceForIcon)
 {
@@ -37,11 +38,15 @@ void IaOraStyle::drawMenuItem(const QStyleOption *opt, QPainter *p, bool saveSpa
 
     p->save();
     QBrush textBrush;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     if (opt->palette.resolve() & (1 << QPalette::ButtonText))
         textBrush = opt->palette.buttonText();
     else
         textBrush = opt->palette.windowText(); // KDE uses windowText rather than buttonText for menus
-
+#else
+    // TODO: I have no idea how to translate that to Qt6, QStyle::resolve(void) doesn't even exist in Qt5, wth ?
+    textBrush = opt->palette.windowText();
+#endif
     switch (menuItem->menuItemType) {
     case QStyleOptionMenuItem::Separator: {
         drawSeparator(opt, p, 10);
@@ -123,7 +128,11 @@ void IaOraStyle::drawMenuItem(const QStyleOption *opt, QPainter *p, bool saveSpa
         QRect subMenuRect(r.right() - 10, r.top(), 10, r.height());
         if (!menuItem->text.isEmpty()) {
             QRect textRect;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             int tab = menuItem->tabWidth;
+#else
+            int tab = m_parent->pixelMetric(QStyle::PM_TabBarTabHSpace, menuItem);
+#endif
             if (saveSpaceForIcon && leftToRight)
                 textRect.setLeft(checkRect.right() + 8);
             else if (!leftToRight)
@@ -149,7 +158,7 @@ void IaOraStyle::drawMenuItem(const QStyleOption *opt, QPainter *p, bool saveSpa
                 p->setFont(f);
             }
 
-            QStringList textList = menuItem->text.split(QRegExp("\t"));
+            QStringList textList = menuItem->text.split(QRegularExpression("\t"));
 
             // draw the shortcut
             if (textList.first() != textList.last()) {

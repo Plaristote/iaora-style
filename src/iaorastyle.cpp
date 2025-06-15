@@ -65,12 +65,21 @@ ColorData *IaOraStyle::lookupData(const QPalette &pal)
         data->gray[6] = QColor("#8692A6");
     } else {
         data->gray[0] = background;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         data->gray[1] = background.dark(107);
         data->gray[2] = background.dark(115);
         data->gray[3] = background.dark(117);
         data->gray[4] = background.dark(131);
         data->gray[5] = background.dark(144);
         data->gray[6] = background.dark(178);
+#else
+        data->gray[1] = background.darker(107);
+        data->gray[2] = background.darker(115);
+        data->gray[3] = background.darker(117);
+        data->gray[4] = background.darker(131);
+        data->gray[5] = background.darker(144);
+        data->gray[6] = background.darker(178);
+#endif
     }
 
     if (highlight.name() == "#8ec7ff") { //Arctic
@@ -116,11 +125,18 @@ ColorData *IaOraStyle::lookupData(const QPalette &pal)
         data->color[3] = QColor("#056EA3");
         data->color[4] = QColor("#0A3453");
     } else {
+        data->color[2] = highlight;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         data->color[0] = highlight.light(150);
         data->color[1] = highlight.light(137);
-        data->color[2] = highlight;
         data->color[3] = highlight.dark(112);
         data->color[4] = highlight.dark(130);
+#else
+        data->color[0] = highlight.lighter(150);
+        data->color[1] = highlight.lighter(137);
+        data->color[3] = highlight.darker(112);
+        data->color[4] = highlight.darker(130);
+#endif
     }
 
     m_data[hash] = data;

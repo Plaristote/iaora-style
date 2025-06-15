@@ -70,7 +70,11 @@ QIcon IaOraStyle::standardIcon(QStyle::StandardPixmap icon, const QStyleOption *
     QString key = QString("iaora_standard_pixmap_%1_%2_%3").arg(QString::number(icon))
                   .arg(QString::number(s.width()))
                   .arg(QString::number(s.height()));
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     if (QPixmapCache::find(key, pix))
+#else
+    if (QPixmapCache::find(key, &pix))
+#endif
         return pix;
 
     ColorData *data = lookupData(pal);

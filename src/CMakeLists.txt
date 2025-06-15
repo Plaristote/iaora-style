@@ -19,10 +19,18 @@ set (STYLE_SOURCES iaorastyle.cpp
 set (iaora-qt_SOURCES iaora-qt.cpp ${STYLE_SOURCES})
 
 add_library (iaora-qt SHARED ${iaora-qt_SOURCES})
-target_link_libraries (iaora-qt Qt5::Core Qt5::Widgets)
-    
-get_target_property(REAL_QMAKE_EXECUTABLE ${Qt5Core_QMAKE_EXECUTABLE} IMPORTED_LOCATION)
+target_link_libraries (iaora-qt Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets)
+
+if (QT_VERSION_MAJOR EQUAL 6)
+  get_target_property(REAL_QMAKE_EXECUTABLE Qt${QT_VERSION_MAJOR}::qmake IMPORTED_LOCATION)
+else()
+  get_target_property(REAL_QMAKE_EXECUTABLE ${Qt5Core_QMAKE_EXECUTABLE} IMPORTED_LOCATION)
+endif()
+
 execute_process(COMMAND "${REAL_QMAKE_EXECUTABLE}" -query QT_INSTALL_PLUGINS
-  OUTPUT_VARIABLE _Qt5_PLUGIN_INSTALL_DIR
-  ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE)
-install (TARGETS iaora-qt LIBRARY DESTINATION ${_Qt5_PLUGIN_INSTALL_DIR}/styles/)
+  OUTPUT_VARIABLE _Qt_PLUGIN_INSTALL_DIR
+  OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+message(STATUS "Install path = ${_Qt_PLUGIN_INSTALL_DIR}")
+
+install (TARGETS iaora-qt LIBRARY DESTINATION ${_Qt_PLUGIN_INSTALL_DIR}/styles/)

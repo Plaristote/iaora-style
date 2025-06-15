@@ -34,7 +34,11 @@ void IaOraStyle::drawProgressBarContents(const QStyleOption *opt, QPainter *p, b
 
     p->save();
     QRect r = pb->rect;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     bool vertical = (pb->orientation == Qt::Vertical);
+#else
+    bool vertical = (pb->state & QStyle::State_Horizontal) == 0;
+#endif
     bool inverted = pb->invertedAppearance;
     qint64 minimum = qint64(pb->minimum);
     qint64 maximum = qint64(pb->maximum);

@@ -80,8 +80,9 @@ void IaOraQt::drawPrimitive(PrimitiveElement element, const QStyleOption *option
     case QStyle::PE_Frame:
         QComboBox *cmb;
 
-        if (widget)
+        if (widget) {
             cmb = qobject_cast<QComboBox *>(widget->parentWidget());
+        }
 
         m_style->drawFrame(option, painter, (cmb) ? IaOraStyle::FrameComboBox : IaOraStyle::FrameFrame);
 
@@ -180,6 +181,14 @@ void IaOraQt::drawPrimitive(PrimitiveElement element, const QStyleOption *option
     }
     case QStyle::PE_IndicatorButtonDropDown:
         //m_style->drawButton(option, painter);
+        break;
+    case QStyle::PE_IndicatorTabClose:
+        if (option->state & QStyle::State_MouseOver) {
+            QIcon::fromTheme("tab-close").paint(painter, option->rect, Qt::AlignCenter, QIcon::Active);
+        } else {
+            QIcon::fromTheme("tab-close").paint(painter, option->rect, Qt::AlignCenter, QIcon::Normal);
+        }
+        // QIcon::fromTheme("tab-close").paint(painter, option->rect, Qt::AlignCenter, QIcon::Disabled);
         break;
     case QStyle::PE_PanelItemViewRow:
         m_style->drawPanelItemViewRow(option, painter);
