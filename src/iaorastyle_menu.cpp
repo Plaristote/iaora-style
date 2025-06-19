@@ -19,7 +19,7 @@
  */
 
 #include "iaorastyle.h"
-#include <QRegularExpression>
+#include <QtGui/QFontMetrics>
 
 void IaOraStyle::drawMenuItem(const QStyleOption *opt, QPainter *p, bool saveSpaceForIcon)
 {
@@ -158,14 +158,16 @@ void IaOraStyle::drawMenuItem(const QStyleOption *opt, QPainter *p, bool saveSpa
                 p->setFont(f);
             }
 
-            QStringList textList = menuItem->text.split(QRegularExpression("\t"));
+            QStringList textList = menuItem->text.split(QString("\t"));
 
             // draw the shortcut
             if (textList.first() != textList.last()) {
+                QFontMetrics metrics(menuItem->font);
+                int shortcutWidth = metrics.horizontalAdvance(textList.last());
                 QRect shortcutRect(textRect);
 
                 if (leftToRight)
-                    shortcutRect.setLeft(textRect.right());
+                    shortcutRect.setLeft(textRect.right() - shortcutWidth - 4);
                 else
                     shortcutRect.setRight(textRect.left() + 4);
 
